@@ -42,17 +42,16 @@ const Market = (props) => {
           // Redirect to home page for staff
           router.push('/');
         } else {
-          router.push('/');
           // Redirect to vendor dashboard only once
-          // if (!initialRedirectDone) {
-          //   setInitialRedirectDone(true);
-          //   console.log(initialRedirectDone)
-          //   router.push('/vendor/dashboard');
-          //
-          // } else {
-          //   // Subsequent redirections go to '/'
-          //   router.push('/');
-          // }
+          if (!initialRedirectDone) {
+            setInitialRedirectDone(true);
+            console.log(initialRedirectDone)
+            router.push('/vendor/dashboard');
+
+          } else {
+            // Subsequent redirections go to '/'
+            router.push('/');
+          }
         }
       } catch (error) {
         // Invalid token format, handle appropriately (e.g., log error, redirect to login)

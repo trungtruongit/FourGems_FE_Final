@@ -45,7 +45,80 @@ export const weeklyChartOptions = (theme) => ({
   },
   yaxis: {
     min: 0,
-    max: 300,
+    max: 10000,
+    show: false,
+    tickAmount: 4,
+    labels: {
+      style: {
+        fontWeight: 500,
+        colors: theme.palette.text.disabled,
+      },
+    },
+  },
+  tooltip: {
+    enabled: false,
+    x: {
+      show: false,
+    },
+    y: {
+      formatter: (val) => `$${val}`,
+    },
+  },
+  plotOptions: {
+    bar: {
+      columnWidth: "50%",
+      borderRadius: 5,
+    },
+  },
+});
+export const weeklyChartOptionsOne = (theme) => ({
+  grid: {
+    show: false,
+  },
+  chart: {
+    background: "transparent",
+    toolbar: {
+      show: false,
+    },
+    fontFamily: theme.typography.fontFamily,
+  },
+  colors: [theme.palette.info.main],
+  dataLabels: {
+    enabled: false,
+  },
+  states: {
+    active: {
+      filter: {
+        type: "none",
+      },
+    },
+    hover: {
+      filter: {
+        type: "none",
+      },
+    },
+  },
+  theme: {
+    mode: theme.palette.mode,
+  },
+  xaxis: {
+    axisBorder: {
+      show: false,
+    },
+    axisTicks: {
+      show: false,
+    },
+    labels: {
+      show: false,
+      style: {
+        fontWeight: 500,
+        colors: theme.palette.text.disabled,
+      },
+    },
+  },
+  yaxis: {
+    min: 0,
+    max: 10,
     show: false,
     tickAmount: 4,
     labels: {
@@ -282,7 +355,7 @@ export const analyticsChartOptions = (theme, categories) => ({
   yaxis: {
     min: 0,
     show: true,
-    max: 10000,
+    max: 40000,
     tickAmount: 6,
     opposite: theme.direction === "rtl",
     labels: {
