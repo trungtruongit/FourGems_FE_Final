@@ -19,121 +19,108 @@ import {useEffect, useState} from "react";
 import { jwtDecode } from "jwt-decode";
 // =======================================================
 const Market = (props) => {
-  const theme = useTheme();
-  const router = useRouter();
+    const theme = useTheme();
+    const router = useRouter();
 
-  const [initialRedirectDone, setInitialRedirectDone] = useState(false);
+    const [initialRedirectDone, setInitialRedirectDone] = useState(false);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const token = localStorage.getItem('token');
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const token = localStorage.getItem('token');
 
-      if (!token) {
-        // No token found, redirect to login page
-        router.push('/login');
-        return; // Exit early
-      }
+            if (!token) {
+                // No token found, redirect to login page
+                router.push('/login');
+                return; // Exit early
+            }
 
-      try {
-        // Attempt to decode the token
-        const decoded = jwtDecode(token);
+            // Attempt to decode the token
+            const decoded = jwtDecode(token);
 
-        if (decoded.role === 'staff') {
-          // Redirect to home page for staff
-          router.push('/');
-        } else {
-          // Redirect to vendor dashboard only once
-          if (!initialRedirectDone) {
-            setInitialRedirectDone(true);
-            console.log(initialRedirectDone)
-            router.push('/vendor/dashboard');
+            if (decoded.role === 'staff') {
+                // Redirect to home page for staff
+                router.push('/');
+            } else {
+                router.push('/vendor/dashboard');
 
-          } else {
-            // Subsequent redirections go to '/'
-            router.push('/');
-          }
+            }
         }
-      } catch (error) {
-        // Invalid token format, handle appropriately (e.g., log error, redirect to login)
-        console.error('Invalid token:', error);
-        router.push('/login');
-      }
-    }
-  }, []);
-  return (
+    }, []);
 
-      <ShopLayout1 topbarBgColor={theme.palette.grey[900]}>
-        <SEO title="FourGems" />
-        <Box bgcolor="#FFFFFF">
-          {/* HERO SLIDER AND GRID */}
-          <Section1 carouselData={props.mainCarouselData} />
+    return (
 
-          {/* SERVICE CARDS */}
-          <Section2 serviceList={props.serviceList} />
+        <ShopLayout1 topbarBgColor={theme.palette.grey[900]}>
+            <SEO title="FourGems" />
+            <Box bgcolor="#FFFFFF">
+                {/* HERO SLIDER AND GRID */}
+                <Section1 carouselData={props.mainCarouselData} />
 
-          {/* CATEGORIES AND ANIMATED OFFER BANNER */}
-          <Section3 categories={props.categories} />
+                {/* SERVICE CARDS */}
+                <Section2 serviceList={props.serviceList} />
 
-          {/* DEALS OF THE DAY AND OFFER BANNERS */}
-          <Section4 products={props.products} />
+                {/* CATEGORIES AND ANIMATED OFFER BANNER */}
+                <Section3 categories={props.categories} />
 
-          {/* TOP OFFER BANNERS */}
-          {/*<Offers />*/}
+                {/* DEALS OF THE DAY AND OFFER BANNERS */}
+                <Section4 products={props.products} />
 
-          {/* PRODUCT ROW WITH ELECTRONICS CATEGORY LIST */}
-          <Section5 products={props.products} />
+                {/* TOP OFFER BANNERS */}
+                {/*<Offers />*/}
 
-          {/*/!* OFFER BANNER *!/*/}
-          <Section6 products={props.products}/>
+                {/* PRODUCT ROW WITH ELECTRONICS CATEGORY LIST */}
+                <Section5 products={props.products} />
 
-          {/*/!* PRODUCT ROW WITH MEN'S FASHION CATEFORY LIST *!/*/}
-          {/*<Section5 data={props.menFashionProducts} />*/}
+                {/*/!* OFFER BANNER *!/*/}
+                <Section6 products={props.products}/>
 
-          {/*/!* OFFER BANNER *!/*/}
-          <Section7 products={props.products}/>
+                {/*/!* PRODUCT ROW WITH MEN'S FASHION CATEFORY LIST *!/*/}
+                {/*<Section5 data={props.menFashionProducts} />*/}
 
-          {/*/!* PRODUCT ROW WITH WOMEN'S FASHION CATEFORY LIST *!/*/}
-          {/*<Section5 data={props.womenFashionProducts} />*/}
+                {/*/!* OFFER BANNER *!/*/}
+                <Section7 products={props.products}/>
 
-          {/*/!*  FEATURED BRANDS *!/*/}
-          <Section8 products={props.products} />
+                {/*/!* PRODUCT ROW WITH WOMEN'S FASHION CATEFORY LIST *!/*/}
+                {/*<Section5 data={props.womenFashionProducts} />*/}
 
-          {/* SELECTED PRODUCTS */}
-          <Section9 products={props.products}/>
-          <div style={{
-            display: "grid",
-            textAlign: "center",
-            paddingBottom: "1.5rem",
-          }}>
-            <H1> Four Gems Jewelry </H1>
-          </div>
-        </Box>
-        {/* SETTINGS IS USED ONLY FOR DEMO, YOU CAN REMOVE THIS */}
-        <Setting/>
-      </ShopLayout1>
-  );
+                {/*/!*  FEATURED BRANDS *!/*/}
+                <Section8 products={props.products} />
+
+                {/* SELECTED PRODUCTS */}
+                <Section9 products={props.products}/>
+                <div style={{
+                    display: "grid",
+                    textAlign: "center",
+                    paddingBottom: "1.5rem",
+                }}>
+                    <H1> Four Gems Jewelry </H1>
+                </div>
+            </Box>
+            {/* SETTINGS IS USED ONLY FOR DEMO, YOU CAN REMOVE THIS */}
+            <Setting/>
+        </ShopLayout1>
+    );
 };
 
 export const getStaticProps = async () => {
-  const brands = await api.getBrands();
-  const products = await api.getProducts();
-  const serviceList = await api.getServices();
-  const categories = await api.getCategories();
-  const mainCarouselData = await api.getMainCarouselData();
-  const menFashionProducts = await api.getMenFashionProducts();
-  const electronicsProducts = await api.getElectronicsProducts();
-  const womenFashionProducts = await api.getWomenFashionProducts();
-  return {
-    props: {
-      brands,
-      products,
-      categories,
-      serviceList,
-      mainCarouselData,
-      menFashionProducts,
-      electronicsProducts,
-      womenFashionProducts,
-    },
-  };
+    const brands = await api.getBrands();
+    const products = await api.getProducts();
+    const serviceList = await api.getServices();
+    const categories = await api.getCategories();
+    const mainCarouselData = await api.getMainCarouselData();
+    const menFashionProducts = await api.getMenFashionProducts();
+    const electronicsProducts = await api.getElectronicsProducts();
+    const womenFashionProducts = await api.getWomenFashionProducts();
+    return {
+        props: {
+            brands,
+            products,
+            categories,
+            serviceList,
+            mainCarouselData,
+            menFashionProducts,
+            electronicsProducts,
+            womenFashionProducts,
+        },
+    };
 };
 export default Market;
