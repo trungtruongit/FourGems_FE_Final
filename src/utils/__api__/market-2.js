@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const getProducts = async () => {
-  const response = await axios.get("/api/market-2/products");
+  const response = await axios.get("/api/market-2/products",);
   return response.data;
 };
 
