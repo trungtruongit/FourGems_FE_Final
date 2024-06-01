@@ -100,7 +100,7 @@ export const categories = [
   },
   {
     id: "c71a65bd-5c01-444e-82fe-3ef09462aff6",
-    name: "Sets",
+    name: "Collection",
     icon: null,
     image: "/assets/images/categories/6.png",
     slug: "cameras",

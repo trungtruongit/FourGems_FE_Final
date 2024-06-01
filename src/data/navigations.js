@@ -602,7 +602,7 @@ const navigations = [
   // {
   //   icon: PlantPot,
   //   title: "Chokers",
-  //   href: "/product/search/home&garden",
+  //   href: "/product/search/home&garden",z
   //   menuComponent: "MegaMenu1",
   //   menuData: {
   //     categories: [
