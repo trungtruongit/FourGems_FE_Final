@@ -1,4 +1,4 @@
-import { Box, useTheme } from "@mui/material";
+import {Box, useTheme} from "@mui/material";
 import SEO from "components/SEO";
 import Setting from "components/Setting";
 import Offers from "pages-sections/market-2/Offers";
@@ -14,114 +14,186 @@ import Section9 from "pages-sections/market-2/Section9";
 import ShopLayout1 from "components/layouts/ShopLayout1";
 import api from "utils/__api__/market-2";
 import {useRouter} from "next/router"; // =======================================================
-import { H1 } from "components/Typography";
+import {H1} from "components/Typography";
 import {useEffect, useState} from "react";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
+import {Api} from "@mui/icons-material";
+import axios from "axios";
+
 // =======================================================
 const Market = (props) => {
-  const theme = useTheme();
-  const router = useRouter();
+    const theme = useTheme();
+    const router = useRouter();
+    const [showBracProduct, setShowBracProduct] = useState([]);
+    const [showRingProduct, setShowRingProduct] = useState([]);
+    const [showEarringProduct, setShowEarringProduct] = useState([]);
+    const [showNecklaceProduct, setShowNecklaceProduct] = useState([]);
 
-  const [initialRedirectDone, setInitialRedirectDone] = useState(false);
+    useEffect(() => {
+        const fetchProductBracelet = async () => {
+            const token = localStorage.getItem("token");
+            try {
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const token = localStorage.getItem('token');
+                const resBracProduct = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=price&sortType= &categoryName=bracelet&searchKeyword= `, {
+                    headers: {
+                        Authorization: 'Bearer ' + token //the token is a variable which holds the token
+                    }
+                });
+                setShowBracProduct(resBracProduct.data.data)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        fetchProductBracelet();
+    }, []);
 
-      if (!token) {
-        // No token found, redirect to login page
-        router.push('/login');
-        return; // Exit early
-      }
+
+    useEffect(() => {
+        const fetchProductRing = async () => {
+            const token = localStorage.getItem("token");
+            try {
+
+                const resRingProduct = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=price&sortType= &categoryName=ring&searchKeyword= `, {
+                    headers: {
+                        Authorization: 'Bearer ' + token //the token is a variable which holds the token
+                    }
+                });
+                setShowRingProduct(resRingProduct.data.data)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        fetchProductRing();
+    }, []);
+
+    useEffect(() => {
+        const fetchProductEarring = async () => {
+            const token = localStorage.getItem("token");
+            try {
+
+                const resEarringProduct = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=price&sortType= &categoryName=earring&searchKeyword= `, {
+                    headers: {
+                        Authorization: 'Bearer ' + token //the token is a variable which holds the token
+                    }
+                });
+                setShowEarringProduct(resEarringProduct.data.data)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        fetchProductEarring();
+    }, []);
+
+    useEffect(() => {
+        const fetchProductNecklaces = async () => {
+            const token = localStorage.getItem("token");
+            try {
+
+                const resNecklacesProduct = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=price&sortType= &categoryName=earring&searchKeyword= `, {
+                    headers: {
+                        Authorization: 'Bearer ' + token //the token is a variable which holds the token
+                    }
+                });
+                setShowNecklaceProduct(resNecklacesProduct.data.data)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        fetchProductNecklaces();
+    }, []);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const token = localStorage.getItem('token');
+            // const dataShow = Api.getProduct(token)
+            if (!token) {
+                // No token found, redirect to login page
+                router.push('/login');
+                return; // Exit early
+            }
 
 
-        // Attempt to decode the token
-        const decoded = jwtDecode(token);
+            // Attempt to decode the token
+            const decoded = jwtDecode(token);
 
-        if (decoded.role === 'staff') {
-          // Redirect to home page for staff
-          router.push('/');
-        } else {
-          router.push('/vendor/dashboard');
+            if (decoded.role === 'staff') {
+                // Redirect to home page for staff
+                router.push('/');
+            } else {
+                router.push('/vendor/dashboard');
 
-      }
-    }
-  }, []);
+            }
+        }
+    }, []);
 
-  return (
+    return (
 
-      <ShopLayout1 topbarBgColor={theme.palette.grey[900]}>
-        <SEO title="FourGems" />
-        <Box bgcolor="#FFFFFF">
-          {/* HERO SLIDER AND GRID */}
-          <Section1 carouselData={props.mainCarouselData} />
+        <ShopLayout1 topbarBgColor={theme.palette.grey[900]}>
+            <SEO title="FourGems"/>
+            <Box bgcolor="#FFFFFF">
+                {/* HERO SLIDER AND GRID */}
+                <Section1 carouselData={props.mainCarouselData}/>
 
-          {/* SERVICE CARDS */}
-          <Section2 serviceList={props.serviceList} />
+                {/* SERVICE CARDS */}
+                <Section2 serviceList={props.serviceList}/>
 
-          {/* CATEGORIES AND ANIMATED OFFER BANNER */}
-          <Section3 categories={props.categories} />
+                {/* CATEGORIES AND ANIMATED OFFER BANNER */}
+                <Section3 categories={props.categories}/>
 
-          {/* DEALS OF THE DAY AND OFFER BANNERS */}
-          <Section4 products={props.products} />
 
-          {/* TOP OFFER BANNERS */}
-          {/*<Offers />*/}
+                {/* Necklaces */}
+                <Section5 products={showNecklaceProduct} />
 
-          {/* PRODUCT ROW WITH ELECTRONICS CATEGORY LIST */}
-          <Section5 products={props.products} />
 
-          {/*/!* OFFER BANNER *!/*/}
-          <Section6 products={props.products}/>
+                {/*/!* Rings*!/*/}
+                <Section6 products={showRingProduct}/>
 
-          {/*/!* PRODUCT ROW WITH MEN'S FASHION CATEFORY LIST *!/*/}
-          {/*<Section5 data={props.menFashionProducts} />*/}
 
-          {/*/!* OFFER BANNER *!/*/}
-          <Section7 products={props.products}/>
+                {/*/!* Earrings *!/*/}
+                <Section7 products={showEarringProduct}/>
 
-          {/*/!* PRODUCT ROW WITH WOMEN'S FASHION CATEFORY LIST *!/*/}
-          {/*<Section5 data={props.womenFashionProducts} />*/}
 
-          {/*/!*  FEATURED BRANDS *!/*/}
-          <Section8 products={props.products} />
+                {/*  Choker */}
+                {/*<Section8 products={showRingProduct} />*/}
 
-          {/* SELECTED PRODUCTS */}
-          <Section9 products={props.products}/>
-          <div style={{
-            display: "grid",
-            textAlign: "center",
-            paddingBottom: "1.5rem",
-          }}>
-            <H1> Four Gems Jewelry </H1>
-          </div>
-        </Box>
-        {/* SETTINGS IS USED ONLY FOR DEMO, YOU CAN REMOVE THIS */}
-        <Setting/>
-      </ShopLayout1>
-  );
+
+                {/* Brac */}
+                <Section9 products={showBracProduct}/>
+
+                <div style={{
+                    display: "grid",
+                    textAlign: "center",
+                    paddingBottom: "1.5rem",
+                }}>
+                    <H1> Four Gems Jewelry </H1>
+                </div>
+            </Box>
+            {/* SETTINGS IS USED ONLY FOR DEMO, YOU CAN REMOVE THIS */}
+            <Setting/>
+        </ShopLayout1>
+    );
 };
 
 export const getStaticProps = async () => {
-  const brands = await api.getBrands();
-  const products = await api.getProducts();
-  const serviceList = await api.getServices();
-  const categories = await api.getCategories();
-  const mainCarouselData = await api.getMainCarouselData();
-  const menFashionProducts = await api.getMenFashionProducts();
-  const electronicsProducts = await api.getElectronicsProducts();
-  const womenFashionProducts = await api.getWomenFashionProducts();
-  return {
-    props: {
-      brands,
-      products,
-      categories,
-      serviceList,
-      mainCarouselData,
-      menFashionProducts,
-      electronicsProducts,
-      womenFashionProducts,
-    },
-  };
+    const brands = await api.getBrands();
+    const products = await api.getProducts();
+    const serviceList = await api.getServices();
+    const categories = await api.getCategories();
+    const mainCarouselData = await api.getMainCarouselData();
+    const menFashionProducts = await api.getMenFashionProducts();
+    const electronicsProducts = await api.getElectronicsProducts();
+    const womenFashionProducts = await api.getWomenFashionProducts();
+    return {
+        props: {
+            brands,
+            products,
+            categories,
+            serviceList,
+            mainCarouselData,
+            menFashionProducts,
+            electronicsProducts,
+            womenFashionProducts,
+        },
+    };
 };
 export default Market;

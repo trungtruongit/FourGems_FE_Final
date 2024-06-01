@@ -165,13 +165,13 @@ const navbarNavigations = [
   //   //   },
   //   // ],
   // },
-  {
-
-    megaMenu: false,
-    megaMenuWithSub: false,
-    title: "Report",
-    url: "/vendor/dashboard"
-    // child: [
+  // {
+  //
+  //   megaMenu: false,
+  //   megaMenuWithSub: false,
+  //   title: "Report",
+  //   url: "/vendor/dashboard"
+  //   // child: [
     //   {
     //     title: "Dashboard",
     //     url: "/vendor/dashboard",
@@ -207,7 +207,7 @@ const navbarNavigations = [
     //     url: "/vendor/account-setting",
     //   },
     // ],
-  },
+  // },
   {
 
     megaMenu: false,

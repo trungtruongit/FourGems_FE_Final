@@ -138,7 +138,7 @@ const categories = [
     "Necklace",
     "Clothe",
     "Ring",
-    "Earning",
+    "Earring",
     "Choker",
     "Bracelet",
 
