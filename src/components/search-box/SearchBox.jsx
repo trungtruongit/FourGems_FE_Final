@@ -139,7 +139,7 @@ const categories = [
     "Clothe",
     "Ring",
     "Earring",
-    "Choker",
+    "Charm",
     "Bracelet",
 
 ];

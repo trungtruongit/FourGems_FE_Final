@@ -900,8 +900,8 @@ const navigations = [
   },
   {
     // icon: TeddyBear,
-    title: "Chokers",
-    href: "/product/search/chokers",
+    title: "Charms",
+    href: "/product/search/charms",
     menuComponent: "MegaMenu1",
   },
   {

@@ -103,6 +103,24 @@ const Market = (props) => {
     }, []);
 
     useEffect(() => {
+        const fetchProductCharm = async () => {
+            const token = localStorage.getItem("token");
+            try {
+
+                const resCharmProduct = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=productId&sortType=ASC&categoryName=charm&searchKeyword= `, {
+                    headers: {
+                        Authorization: 'Bearer ' + token //the token is a variable which holds the token
+                    }
+                });
+                setShowNecklaceProduct(resCharmProduct.data.data)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        fetchProductCharm();
+    }, []);
+
+    useEffect(() => {
         if (typeof window !== 'undefined') {
             const token = localStorage.getItem('token');
             // const dataShow = Api.getProduct(token)
@@ -153,8 +171,8 @@ const Market = (props) => {
                 <Section7 products={showEarringProduct}/>
 
 
-                {/*  Choker */}
-                {/*<Section8 products={showRingProduct} />*/}
+                {/*  Charm */}
+                <Section8 products={showRingProduct} />
 
 
                 {/* Brac */}
