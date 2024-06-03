@@ -14,8 +14,6 @@ import {Formik} from "formik";
 import DropZone from "components/DropZone";
 import {FlexBox} from "components/flex-box";
 import BazaarImage from "components/BazaarImage";
-import BazaarSwitch from "../../../components/BazaarSwitch";
-import {StyledTableCell} from "../StyledComponents";
 
 const UploadImageBox = styled(Box)(({theme}) => ({
     width: 70,

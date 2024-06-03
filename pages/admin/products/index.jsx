@@ -82,16 +82,8 @@ export default function ProductList(props) {
   return (
       <Box py={4}>
         <H3>Product List</H3>
-          <Button size="small" color="info" variant="outlined" sx={{
-            position: "absolute",
-            bottom: "517px",
-            right: "210px",
-            height: "44px",
-            width: "144.74px",
-            color: "#FFFFFF",
-            backgroundColor: "#4E97FD"
-          }} onClick={hadleNav1}>
-            All Categories</Button>
+
+
         <SearchArea
             handleSearch={() => {
             }}

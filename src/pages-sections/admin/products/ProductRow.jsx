@@ -70,7 +70,7 @@ const ProductRow = ({ product }) => {
         </StyledIconButton>
 
         <StyledIconButton>
-          <Delete />
+          <Delete onClick={}/>
         </StyledIconButton>
       </StyledTableCell>
     </StyledTableRow>
