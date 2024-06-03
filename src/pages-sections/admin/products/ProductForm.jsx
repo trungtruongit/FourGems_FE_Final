@@ -298,16 +298,28 @@ const ProductForm = (props) => {
                             </Grid>
 
 
-                            <StyledTableCell item sm={6} xs={12} align="left" sx={{ml: 1, mt: 3, fontWeight: 400}}>
-                                Is Gem
-                                <BazaarSwitch
+                            <Grid item sm={6} xs={12}>
+                                <TextField
+                                    select
+                                    fullWidth
                                     color="info"
-                                    checked={productPublish}
-                                    onChange={() => setProductPublish((state) => !state)}
-                                />
-                            </StyledTableCell>
+                                    size="medium"
+                                    name="isGem"
+                                    onBlur={handleBlur}
+                                    placeholder="Gem"
+                                    onChange={handleChange}
+                                    value={values.product_type}
+                                    label="Is Gem"
+                                    error={!!touched.isGem && !!errors.isGem}
+                                    helperText={touched.isGem && errors.isGem}
+                                >
+                                    <MenuItem value="1">True</MenuItem>
+                                    <MenuItem value="0">False</MenuItem>
 
-                            <Grid item sm={6} xs={12} sx={{ml: "415px"}}>
+                                </TextField>
+                            </Grid>
+
+                            <Grid item sm={6} xs={12}>
                                 <TextField
                                     select
                                     fullWidth

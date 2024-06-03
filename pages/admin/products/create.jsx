@@ -11,7 +11,7 @@ CreateProduct.getLayout = function getLayout(page) {
 }; // =============================================================================
 
 export default function CreateProduct() {
-    const [productPublish, setProductPublish] = useState(false);
+    const [productPublish, setProductPublish] = useState(1);
     const [files, setFiles] = useState([]); // HANDLE UPDATE NEW IMAGE VIA DROP ZONE
 
 
@@ -27,6 +27,7 @@ export default function CreateProduct() {
         costPrice: "",
         goldType: "",
         collection: "",
+        isGem: "",
         typeId: "",
 
     };
@@ -42,6 +43,7 @@ export default function CreateProduct() {
         costPrice: yup.number().required("required"),
         goldType: yup.string().required("required"),
         collection: yup.number().required("required"),
+        isGem: yup.number().required("required"),
         typeId: yup.number().required("required"),
     });
 
@@ -85,7 +87,7 @@ export default function CreateProduct() {
             ratioPrice: values.ratioPrice,
             stonePrice: values.stonePrice,
             costPrice: values.costPrice,
-            isGem: productPublish,
+            isGem: values.isGem,
             image: outputString,
             quantityInStock: values.quantity,
             description: values.description,
