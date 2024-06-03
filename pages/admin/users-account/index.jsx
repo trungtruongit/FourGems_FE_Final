@@ -50,7 +50,6 @@ CustomerList.getLayout = function getLayout(page) {
 
 export default function CustomerList({ customers }) {
   const router = useRouter(); // useRouter should be called inside the component
-
   const handleNav = () => {
     router.push('/admin/users/create');
   };
