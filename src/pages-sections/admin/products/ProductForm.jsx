@@ -16,7 +16,6 @@ import {FlexBox} from "components/flex-box";
 import BazaarImage from "components/BazaarImage";
 import BazaarSwitch from "../../../components/BazaarSwitch";
 import {StyledTableCell} from "../StyledComponents";
-import {token} from "stylis"; // styled components
 
 const UploadImageBox = styled(Box)(({theme}) => ({
     width: 70,
@@ -40,17 +39,28 @@ const StyledClear = styled(Clear)(() => ({
 // ================================================================
 const ProductForm = (props) => {
 
-    const {initialValues, validationSchema, handleFormSubmit, setProductPublish, productPublish} = props;
-    const [files, setFiles] = useState([]); // HANDLE UPDATE NEW IMAGE VIA DROP ZONE
-
+    const {
+        initialValues,
+        validationSchema,
+        handleFormSubmit,
+        setProductPublish,
+        productPublish,
+        files,
+        setFiles
+    } = props;
     const handleChangeDropZone = (files) => {
-        files.forEach((file) =>
-            Object.assign(file, {
-                preview: URL.createObjectURL(file),
-            })
-        );
-        setFiles(files);
-    }; // HANDLE DELETE UPLOAD IMAGE
+        const updatedFiles = files.map((file) => {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setFiles((prevFiles) => [
+                    ...prevFiles,
+                    { file, preview: URL.createObjectURL(file), base64: reader.result }
+                ]);
+            };
+            reader.readAsDataURL(file);
+            return file;
+        });
+    };
 
     const handleFileDelete = (file) => () => {
         setFiles((files) => files.filter((item) => item.name !== file.name));
@@ -110,23 +120,6 @@ const ProductForm = (props) => {
                                     helperText={touched.barcode && errors.barcode}
                                 />
                             </Grid>
-                            <Grid item sm={12} xs={12}>
-                                <TextField
-                                    fullWidth
-                                    type="number"
-                                    name="collection"
-                                    label="Collection"
-                                    color="info"
-                                    size="medium"
-                                    placeholder="Collection"
-                                    value={values.collection}
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    error={!!touched.collection && !!errors.collection}
-                                    helperText={touched.collection && errors.collection}
-                                />
-                            </Grid>
-
 
                             <Grid item xs={12}>
                                 <DropZone onChange={(files) => handleChangeDropZone(files)}/>
@@ -139,6 +132,7 @@ const ProductForm = (props) => {
 
                                         </UploadImageBox>
                                     ))}
+
                                 </FlexBox>
                             </Grid>
 
@@ -194,17 +188,17 @@ const ProductForm = (props) => {
                             <Grid item sm={6} xs={12}>
                                 <TextField
                                     fullWidth
-                                    name="labor_price"
+                                    name="laborPrice"
                                     color="info"
                                     size="medium"
                                     type="number"
                                     onBlur={handleBlur}
-                                    value={values.labor_price}
+                                    value={values.laborPrice}
                                     label="Labor Cost"
                                     onChange={handleChange}
                                     placeholder="Labor Cost"
-                                    error={!!touched.labor_price && !!errors.labor_price}
-                                    helperText={touched.labor_price && errors.labor_price}
+                                    error={!!touched.laborPrice && !!errors.laborPrice}
+                                    helperText={touched.laborPrice && errors.laborPrice}
                                 />
                             </Grid>
                             <Grid item sm={6} xs={12}>
@@ -213,14 +207,14 @@ const ProductForm = (props) => {
                                     color="info"
                                     size="medium"
                                     type="number"
-                                    name="ratio_price"
+                                    name="ratioPrice"
                                     label="Ratio of Price"
                                     onBlur={handleBlur}
                                     onChange={handleChange}
                                     placeholder="Ratio of Price"
-                                    value={values.ratio_price}
-                                    error={!!touched.ratio_price && !!errors.ratio_price}
-                                    helperText={touched.ratio_price && errors.ratio_price}
+                                    value={values.ratioPrice}
+                                    error={!!touched.ratioPrice && !!errors.ratioPrice}
+                                    helperText={touched.ratioPrice && errors.ratioPrice}
                                 />
                             </Grid>
                             <Grid item sm={6} xs={12}>
@@ -229,14 +223,30 @@ const ProductForm = (props) => {
                                     color="info"
                                     size="medium"
                                     type="number"
-                                    name="stone_price"
+                                    name="stonePrice"
                                     label="Stone Price"
                                     onBlur={handleBlur}
                                     onChange={handleChange}
                                     placeholder="Stone Price"
-                                    value={values.stone_price}
-                                    error={!!touched.stone_price && !!errors.stone_price}
-                                    helperText={touched.stone_price && errors.stone_price}
+                                    value={values.stonePrice}
+                                    error={!!touched.stonePrice && !!errors.stonePrice}
+                                    helperText={touched.stonePrice && errors.stonePrice}
+                                />
+                            </Grid>
+                            <Grid item sm={6} xs={12}>
+                                <TextField
+                                    fullWidth
+                                    color="info"
+                                    size="medium"
+                                    type="number"
+                                    name="costPrice"
+                                    label="Gold Price"
+                                    onBlur={handleBlur}
+                                    onChange={handleChange}
+                                    placeholder="Gold Price"
+                                    value={values.costPrice}
+                                    error={!!touched.costPrice && !!errors.costPrice}
+                                    helperText={touched.costPrice && errors.costPrice}
                                 />
                             </Grid>
                             <Grid item sm={6} xs={12}>
@@ -245,25 +255,49 @@ const ProductForm = (props) => {
                                     fullWidth
                                     color="info"
                                     size="medium"
-                                    name="gold_type"
+                                    name="goldType"
                                     onBlur={handleBlur}
                                     placeholder="Type of Gold"
                                     onChange={handleChange}
-                                    value={values.gold_type}
+                                    value={values.goldType}
                                     label="Type of Gold"
-                                    error={!!touched.gold_type && !!errors.gold_type}
-                                    helperText={touched.gold_type && errors.gold_type}
+                                    error={!!touched.goldType && !!errors.goldType}
+                                    helperText={touched.goldType && errors.goldType}
                                 >
-                                    <MenuItem value="gold_10k">Gold 10K</MenuItem>
-                                    <MenuItem value="gold_14k">Gold 14K</MenuItem>
-                                    <MenuItem value="gold_16k">Gold 16K</MenuItem>
-                                    <MenuItem value="gold_18k">Gold 18K</MenuItem>
-                                    <MenuItem value="gold_20k">Gold 20K</MenuItem>
-                                    <MenuItem value="gold_21k">Gold 21K</MenuItem>
-                                    <MenuItem value="gold_22k">Gold 22K</MenuItem>
-                                    <MenuItem value="gold_24k">Gold 24K</MenuItem>
+                                    <MenuItem value="50">Gold 10K</MenuItem>
+                                    <MenuItem value="53">Gold 14K</MenuItem>
+                                    <MenuItem value="54">Gold 16K</MenuItem>
+                                    <MenuItem value="51">Gold 18K</MenuItem>
+                                    <MenuItem value="55">Gold 20K</MenuItem>
+                                    <MenuItem value="56">Gold 21K</MenuItem>
+                                    <MenuItem value="57">Gold 22K</MenuItem>
+                                    <MenuItem value="52">Gold 24K</MenuItem>
                                 </TextField>
                             </Grid>
+
+                            <Grid item sm={6} xs={12}>
+                                <TextField
+                                    select
+                                    fullWidth
+                                    color="info"
+                                    size="medium"
+                                    name="collection"
+                                    onBlur={handleBlur}
+                                    placeholder="Collection"
+                                    onChange={handleChange}
+                                    value={values.gold_type}
+                                    label="Collection"
+                                    error={!!touched.collection && !!errors.collection}
+                                    helperText={touched.collection && errors.collection}
+                                >
+                                    <MenuItem value="1">Spring</MenuItem>
+                                    <MenuItem value="2">Summer</MenuItem>
+                                    <MenuItem value="3">Fall</MenuItem>
+                                    <MenuItem value="4">Winter</MenuItem>
+                                </TextField>
+                            </Grid>
+
+
                             <StyledTableCell item sm={6} xs={12} align="left" sx={{ml: 1, mt: 3, fontWeight: 400}}>
                                 Is Gem
                                 <BazaarSwitch
@@ -279,20 +313,20 @@ const ProductForm = (props) => {
                                     fullWidth
                                     color="info"
                                     size="medium"
-                                    name="product_type"
+                                    name="typeId"
                                     onBlur={handleBlur}
                                     placeholder="Type of Product"
                                     onChange={handleChange}
                                     value={values.product_type}
                                     label="Type of Product"
-                                    error={!!touched.product_type && !!errors.product_type}
-                                    helperText={touched.product_type && errors.product_type}
+                                    error={!!touched.typeId && !!errors.typeId}
+                                    helperText={touched.typeId && errors.typeId}
                                 >
-                                    <MenuItem value="bracelet">Bracelet</MenuItem>
-                                    <MenuItem value="earring">Earring</MenuItem>
-                                    <MenuItem value="ring">Ring</MenuItem>
-                                    <MenuItem value="necklace">Necklace</MenuItem>
-                                    <MenuItem value="charm">Charm</MenuItem>
+                                    <MenuItem value="30">Bracelet</MenuItem>
+                                    <MenuItem value="31">Earring</MenuItem>
+                                    <MenuItem value="32">Ring</MenuItem>
+                                    <MenuItem value="33">Necklace</MenuItem>
+                                    <MenuItem value="34">Charm</MenuItem>
                                 </TextField>
                             </Grid>
                             <Grid item sm={12} xs={12}>
