@@ -1,22 +1,24 @@
-import { Box } from "@mui/material";
+import {Box} from "@mui/material";
 import * as yup from "yup";
-import { H3 } from "components/Typography";
-import { ProductForm } from "pages-sections/admin";
-import VendorDashboardLayout from "components/layouts/vendor-dashboard"; // =============================================================================
+import {H3} from "components/Typography";
+import {ProductForm} from "pages-sections/admin";
+import VendorDashboardLayout from "components/layouts/vendor-dashboard";
+import {useState} from "react"; // =============================================================================
 
 CreateProduct.getLayout = function getLayout(page) {
-  return <VendorDashboardLayout>{page}</VendorDashboardLayout>;
+    return <VendorDashboardLayout>{page}</VendorDashboardLayout>;
 }; // =============================================================================
 
 export default function CreateProduct() {
   const INITIAL_VALUES = {
+    userName: "",
     name: "",
-    tags: "",
-    stock: "",
-    price: "",
-    category: "",
-    sale_price: "",
-    description: "",
+    address: "",
+    email: "",
+    password: "",
+    phoneNumber: "",
+    roleId: "",
+    counterId: "",
   };
   const validationSchema = yup.object().shape({
     name: yup.string().required("required"),
@@ -28,17 +30,24 @@ export default function CreateProduct() {
     tags: yup.object().required("required"),
   });
 
-  const handleFormSubmit = () => {};
+  const handleFormSubmit = (values) => {
+    console.log(values)
+    const productNew = {
 
-  return (
-    <Box py={4}>
-      <H3 mb={2}>Add New Product</H3>
+    }
+  };
 
-      <ProductForm
-        initialValues={INITIAL_VALUES}
-        validationSchema={validationSchema}
-        handleFormSubmit={handleFormSubmit}
-      />
-    </Box>
-  );
+    return (
+        <Box py={4}>
+            <H3 mb={2}>Add New Product</H3>
+
+            <ProductForm
+                setProductPublish={setProductPublish}
+                productPublish = {productPublish}
+                initialValues={INITIAL_VALUES}
+                validationSchema={validationSchema}
+                handleFormSubmit={handleFormSubmit}
+            />
+        </Box>
+    );
 }

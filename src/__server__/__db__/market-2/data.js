@@ -89,7 +89,7 @@ export const categories = [
     id: "e13157eb-e9c5-4a24-a59b-98382b7eb3ea",
     name: "Charms",
     icon: null,
-    image: "/assets/images/categories/5.png",
+    image: "/assets/images/categories/charm.jpg",
     slug: "fashion",
     parent: [],
     description: null,
