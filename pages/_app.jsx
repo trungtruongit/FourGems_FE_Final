@@ -36,7 +36,7 @@ const App = ({ Component, pageProps }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <OpenGraphTags />
-        <title>QwikShop</title>
+        <title>FourGemsShop</title>
       </Head>
 
       <SettingsProvider>
