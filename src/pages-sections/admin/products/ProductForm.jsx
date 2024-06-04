@@ -13,7 +13,9 @@ import { Clear } from "@mui/icons-material";
 import { Formik } from "formik";
 import DropZone from "components/DropZone";
 import { FlexBox } from "components/flex-box";
-import BazaarImage from "components/BazaarImage"; // styled components
+import BazaarImage from "components/BazaarImage";
+import BazaarSwitch from "../../../components/BazaarSwitch";
+import {StyledTableCell} from "../StyledComponents"; // styled components
 
 const UploadImageBox = styled(Box)(({ theme }) => ({
   width: 70,
@@ -38,7 +40,7 @@ const StyledClear = styled(Clear)(() => ({
 const ProductForm = (props) => {
   const { initialValues, validationSchema, handleFormSubmit } = props;
   const [files, setFiles] = useState([]); // HANDLE UPDATE NEW IMAGE VIA DROP ZONE
-
+  const [productPulish, setProductPublish] = useState();
   const handleChangeDropZone = (files) => {
     files.forEach((file) =>
       Object.assign(file, {
@@ -73,11 +75,11 @@ const ProductForm = (props) => {
         }) => (
           <form onSubmit={handleSubmit}>
             <Grid container spacing={3}>
-              <Grid item sm={6} xs={12}>
+              <Grid item sm={12} xs={12}>
                 <TextField
                   fullWidth
                   name="name"
-                  label="Name"
+                  label="Name of Product"
                   color="info"
                   size="medium"
                   placeholder="Name"
@@ -87,25 +89,6 @@ const ProductForm = (props) => {
                   error={!!touched.name && !!errors.name}
                   helperText={touched.name && errors.name}
                 />
-              </Grid>
-              <Grid item sm={6} xs={12}>
-                <TextField
-                  select
-                  fullWidth
-                  color="info"
-                  size="medium"
-                  name="category"
-                  onBlur={handleBlur}
-                  placeholder="Category"
-                  onChange={handleChange}
-                  value={values.category}
-                  label="Select Category"
-                  error={!!touched.category && !!errors.category}
-                  helperText={touched.category && errors.category}
-                >
-                  <MenuItem value="electronics">Electronics</MenuItem>
-                  <MenuItem value="fashion">Fashion</MenuItem>
-                </TextField>
               </Grid>
 
               <Grid item xs={12}>
@@ -157,17 +140,18 @@ const ProductForm = (props) => {
               </Grid>
               <Grid item sm={6} xs={12}>
                 <TextField
-                  fullWidth
-                  name="tags"
-                  label="Tags"
-                  color="info"
-                  size="medium"
-                  placeholder="Tags"
-                  onBlur={handleBlur}
-                  value={values.tags}
-                  onChange={handleChange}
-                  error={!!touched.tags && !!errors.tags}
-                  helperText={touched.tags && errors.tags}
+                    fullWidth
+                    name="price"
+                    color="info"
+                    size="medium"
+                    type="number"
+                    onBlur={handleBlur}
+                    value={values.price}
+                    label="Weight"
+                    onChange={handleChange}
+                    placeholder="Weight"
+                    error={!!touched.price && !!errors.price}
+                    helperText={touched.price && errors.price}
                 />
               </Grid>
               <Grid item sm={6} xs={12}>
@@ -179,9 +163,9 @@ const ProductForm = (props) => {
                   type="number"
                   onBlur={handleBlur}
                   value={values.price}
-                  label="Regular Price"
+                  label="Labor Cost"
                   onChange={handleChange}
-                  placeholder="Regular Price"
+                  placeholder="Labor Cost"
                   error={!!touched.price && !!errors.price}
                   helperText={touched.price && errors.price}
                 />
@@ -193,17 +177,94 @@ const ProductForm = (props) => {
                   size="medium"
                   type="number"
                   name="sale_price"
-                  label="Sale Price"
+                  label="Ratio of Price"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  placeholder="Sale Price"
+                  placeholder="Ratio of Price"
                   value={values.sale_price}
                   error={!!touched.sale_price && !!errors.sale_price}
                   helperText={touched.sale_price && errors.sale_price}
                 />
               </Grid>
-
               <Grid item sm={6} xs={12}>
+                <TextField
+                    fullWidth
+                    color="info"
+                    size="medium"
+                    type="number"
+                    name="sale_price"
+                    label="Stone Price"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    placeholder="Stone Price"
+                    value={values.sale_price}
+                    error={!!touched.sale_price && !!errors.sale_price}
+                    helperText={touched.sale_price && errors.sale_price}
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                    select
+                    fullWidth
+                    color="info"
+                    size="medium"
+                    name="category"
+                    onBlur={handleBlur}
+                    placeholder="Category"
+                    onChange={handleChange}
+                    value={values.category}
+                    label="GoldId"
+                    error={!!touched.category && !!errors.category}
+                    helperText={touched.category && errors.category}
+                >
+                  <MenuItem value="electronics">Gold 10K</MenuItem>
+                  <MenuItem value="electronics">Gold 14K</MenuItem>
+                  <MenuItem value="electronics">Gold 16K</MenuItem>
+                  <MenuItem value="electronics">Gold 18K</MenuItem>
+                  <MenuItem value="electronics">Gold 20K</MenuItem>
+                  <MenuItem value="electronics">Gold 21K</MenuItem>
+                  <MenuItem value="electronics">Gold 22K</MenuItem>
+                  <MenuItem value="electronics">Gold 24K</MenuItem>
+
+                </TextField>
+              </Grid>
+              <StyledTableCell item sm={6} xs={12} align="left" sx={{
+                ml: 1,
+                mt: 3,
+                fontWeight: 400,
+              }}>
+                Is Gem
+                <BazaarSwitch
+                    color="info"
+                    checked={productPulish}
+                    onChange={() => setProductPublish((state) => !state)}
+                />
+              </StyledTableCell>
+              <Grid item sm={6} xs={12} sx={{
+                ml: "382px"
+              }}>
+                <TextField
+                    select
+                    fullWidth
+                    color="info"
+                    size="medium"
+                    name="category"
+                    onBlur={handleBlur}
+                    placeholder="Category"
+                    onChange={handleChange}
+                    value={values.category}
+                    label="TypeId"
+                    error={!!touched.category && !!errors.category}
+                    helperText={touched.category && errors.category}
+                >
+                  <MenuItem value="electronics">Bracelet</MenuItem>
+                  <MenuItem value="electronics">Earring</MenuItem>
+                  <MenuItem value="electronics">Ring</MenuItem>
+                  <MenuItem value="electronics">Necklace</MenuItem>
+                  <MenuItem value="electronics">Charm</MenuItem>
+                </TextField>
+              </Grid>
+              <Grid item sm={12} xs={12}>
                 <Button variant="contained" color="info" type="submit">
                   Save product
                 </Button>
@@ -215,5 +276,4 @@ const ProductForm = (props) => {
     </Card>
   );
 };
-
 export default ProductForm;

@@ -84,7 +84,7 @@ export default function ProductList(props) {
         <H3>Product List</H3>
           <Button size="small" color="info" variant="outlined" sx={{
             position: "absolute",
-            bottom: "517px",
+            top: "142px",
             right: "210px",
             height: "44px",
             width: "144.74px",
