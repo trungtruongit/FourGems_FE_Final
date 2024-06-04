@@ -11,13 +11,12 @@ import { currency } from "lib"; // =============================================
 
 // ========================================================================
 const CustomerRow = ({ customer }) => {
-  const { email, name, phone, avatar, balance, orders } = customer;
+  const { fullName, phoneNumber, address, roleName, revenue } = customer;
   return (
     <StyledTableRow tabIndex={-1} role="checkbox">
       <StyledTableCell align="left">
         <FlexBox alignItems="center" gap={1.5}>
-          <Avatar src={avatar} />
-          <Paragraph>{name}</Paragraph>
+          <Paragraph>{fullName}</Paragraph>
         </FlexBox>
       </StyledTableCell>
 
@@ -27,7 +26,7 @@ const CustomerRow = ({ customer }) => {
           fontWeight: 400,
         }}
       >
-        {phone}
+        {phoneNumber}
       </StyledTableCell>
 
       <StyledTableCell
@@ -36,7 +35,7 @@ const CustomerRow = ({ customer }) => {
           fontWeight: 400,
         }}
       >
-        {email}
+        {address}
       </StyledTableCell>
 
       <StyledTableCell
@@ -45,7 +44,7 @@ const CustomerRow = ({ customer }) => {
           fontWeight: 400,
         }}
       >
-        {currency(balance)}
+        {currency(revenue)}
       </StyledTableCell>
 
       <StyledTableCell
@@ -54,7 +53,7 @@ const CustomerRow = ({ customer }) => {
           fontWeight: 400,
         }}
       >
-        {orders}
+        {roleName}
       </StyledTableCell>
 
       <StyledTableCell align="center">

@@ -48,6 +48,7 @@ ProductList.getLayout = function getLayout(page) {
 
 // =============================================================================
 export default function ProductList(props) {
+
     const {products} = props; // RESHAPE THE PRODUCT LIST BASED TABLE HEAD CELL ID
     const router = useRouter()
     const hadleNav = () => {
