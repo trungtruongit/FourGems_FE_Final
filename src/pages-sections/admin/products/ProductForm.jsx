@@ -12,6 +12,7 @@ import {
 import {Clear} from "@mui/icons-material";
 import {Formik} from "formik";
 import DropZone from "components/DropZone";
+
 import {FlexBox} from "components/flex-box";
 import BazaarImage from "components/BazaarImage";
 
@@ -25,6 +26,7 @@ const UploadImageBox = styled(Box)(({theme}) => ({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: alpha(theme.palette.info.light, 0.1),
+
 }));
 const StyledClear = styled(Clear)(() => ({
     top: 5,
@@ -36,6 +38,7 @@ const StyledClear = styled(Clear)(() => ({
 
 // ================================================================
 const ProductForm = (props) => {
+
 
     const {
         initialValues,
@@ -353,3 +356,4 @@ const ProductForm = (props) => {
 };
 
 export default ProductForm;
+
