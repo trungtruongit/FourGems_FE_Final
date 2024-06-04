@@ -44,7 +44,7 @@ const WishCard = () => {
         const fetchData = async () => {
             try {
                 //http://localhost:8080/order/get-money-by-date?countId=1&startDate=2021-05-29&endDate=2024-05-29
-                const res = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/order/get-money-by-date?countId=1&startDate=2021-05-25&endDate=${endDate}`, {
+                const res = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/order/get-money-by-date?countId=1&startDate=${endDate}&endDate=${endDate}`, {
                     headers: {
                         Authorization: 'Bearer ' + token //the token is a variable which holds the token
                     }

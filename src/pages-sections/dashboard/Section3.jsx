@@ -165,7 +165,7 @@ const Section3 = () => {
                             type="bar"
                             height={100}
                             series={totalOrderseries1}
-                            options={options.weeklyChartOptions(theme)}
+                            options={options.weeklyChartOptionsOne(theme)}
                         />
                     </Card2>
                 </Grid>
