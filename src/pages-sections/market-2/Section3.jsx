@@ -67,7 +67,7 @@ const Section3 = ({ categories }) => {
 
                 <Grid item xs={12}>
                     <AdWrapper alignItems="center">
-                        <AdTitle1>Black friday sale!</AdTitle1>
+                        <AdTitle1>Autumn sale!</AdTitle1>
 
                         <Paragraph
                             fontSize={28}
