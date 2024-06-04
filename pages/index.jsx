@@ -1,4 +1,4 @@
-import { Box, useTheme } from "@mui/material";
+import {Box, useTheme} from "@mui/material";
 import SEO from "components/SEO";
 import Setting from "components/Setting";
 import Offers from "pages-sections/market-2/Offers";
@@ -14,127 +14,204 @@ import Section9 from "pages-sections/market-2/Section9";
 import ShopLayout1 from "components/layouts/ShopLayout1";
 import api from "utils/__api__/market-2";
 import {useRouter} from "next/router"; // =======================================================
-import { H1 } from "components/Typography";
+import {H1} from "components/Typography";
 import {useEffect, useState} from "react";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
+import {Api} from "@mui/icons-material";
+import axios from "axios";
+
 // =======================================================
 const Market = (props) => {
-  const theme = useTheme();
-  const router = useRouter();
+    const theme = useTheme();
+    const router = useRouter();
+    const [showBracProduct, setShowBracProduct] = useState([]);
+    const [showRingProduct, setShowRingProduct] = useState([]);
+    const [showEarringProduct, setShowEarringProduct] = useState([]);
+    const [showNecklaceProduct, setShowNecklaceProduct] = useState([]);
 
-  const [initialRedirectDone, setInitialRedirectDone] = useState(false);
+    useEffect(() => {
+        const fetchProductBracelet = async () => {
+            const token = localStorage.getItem("token");
+            try {
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const token = localStorage.getItem('token');
-
-      if (!token) {
-        // No token found, redirect to login page
-        router.push('/login');
-        return; // Exit early
-      }
-
-      try {
-        // Attempt to decode the token
-        const decoded = jwtDecode(token);
-
-        if (decoded.role === 'staff') {
-          // Redirect to home page for staff
-          router.push('/');
-        } else {
-          router.push('/');
-          // Redirect to vendor dashboard only once
-          // if (!initialRedirectDone) {
-          //   setInitialRedirectDone(true);
-          //   console.log(initialRedirectDone)
-          //   router.push('/vendor/dashboard');
-          //
-          // } else {
-          //   // Subsequent redirections go to '/'
-          //   router.push('/');
-          // }
+                const resBracProduct = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=price&sortType= &categoryName=bracelet&searchKeyword= `, {
+                    headers: {
+                        Authorization: 'Bearer ' + token //the token is a variable which holds the token
+                    }
+                });
+                setShowBracProduct(resBracProduct.data.data)
+            } catch (e) {
+                console.log(e)
+            }
         }
-      } catch (error) {
-        // Invalid token format, handle appropriately (e.g., log error, redirect to login)
-        console.error('Invalid token:', error);
-        router.push('/login');
-      }
-    }
-  }, []);
-  return (
+        fetchProductBracelet();
+    }, []);
 
-      <ShopLayout1 topbarBgColor={theme.palette.grey[900]}>
-        <SEO title="FourGems" />
-        <Box bgcolor="#FFFFFF">
-          {/* HERO SLIDER AND GRID */}
-          <Section1 carouselData={props.mainCarouselData} />
 
-          {/* SERVICE CARDS */}
-          <Section2 serviceList={props.serviceList} />
+    useEffect(() => {
+        const fetchProductRing = async () => {
+            const token = localStorage.getItem("token");
+            try {
 
-          {/* CATEGORIES AND ANIMATED OFFER BANNER */}
-          <Section3 categories={props.categories} />
+                const resRingProduct = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=price&sortType= &categoryName=ring&searchKeyword= `, {
+                    headers: {
+                        Authorization: 'Bearer ' + token //the token is a variable which holds the token
+                    }
+                });
+                setShowRingProduct(resRingProduct.data.data)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        fetchProductRing();
+    }, []);
 
-          {/* DEALS OF THE DAY AND OFFER BANNERS */}
-          <Section4 products={props.products} />
+    useEffect(() => {
+        const fetchProductEarring = async () => {
+            const token = localStorage.getItem("token");
+            try {
 
-          {/* TOP OFFER BANNERS */}
-          {/*<Offers />*/}
+                const resEarringProduct = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=price&sortType= &categoryName=earring&searchKeyword= `, {
+                    headers: {
+                        Authorization: 'Bearer ' + token //the token is a variable which holds the token
+                    }
+                });
+                setShowEarringProduct(resEarringProduct.data.data)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        fetchProductEarring();
+    }, []);
 
-          {/* PRODUCT ROW WITH ELECTRONICS CATEGORY LIST */}
-          <Section5 products={props.products} />
+    useEffect(() => {
+        const fetchProductNecklaces = async () => {
+            const token = localStorage.getItem("token");
+            try {
 
-          {/*/!* OFFER BANNER *!/*/}
-          <Section6 products={props.products}/>
+                const resNecklacesProduct = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=price&sortType= &categoryName=earring&searchKeyword= `, {
+                    headers: {
+                        Authorization: 'Bearer ' + token //the token is a variable which holds the token
+                    }
+                });
+                setShowNecklaceProduct(resNecklacesProduct.data.data)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        fetchProductNecklaces();
+    }, []);
 
-          {/*/!* PRODUCT ROW WITH MEN'S FASHION CATEFORY LIST *!/*/}
-          {/*<Section5 data={props.menFashionProducts} />*/}
+    useEffect(() => {
+        const fetchProductCharm = async () => {
+            const token = localStorage.getItem("token");
+            try {
 
-          {/*/!* OFFER BANNER *!/*/}
-          <Section7 products={props.products}/>
+                const resCharmProduct = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=productId&sortType=ASC&categoryName=charm&searchKeyword= `, {
+                    headers: {
+                        Authorization: 'Bearer ' + token //the token is a variable which holds the token
+                    }
+                });
+                setShowNecklaceProduct(resCharmProduct.data.data)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        fetchProductCharm();
+    }, []);
 
-          {/*/!* PRODUCT ROW WITH WOMEN'S FASHION CATEFORY LIST *!/*/}
-          {/*<Section5 data={props.womenFashionProducts} />*/}
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const token = localStorage.getItem('token');
+            // const dataShow = Api.getProduct(token)
+            if (!token) {
+                // No token found, redirect to login page
+                router.push('/login');
+                return; // Exit early
+            }
 
-          {/*/!*  FEATURED BRANDS *!/*/}
-          <Section8 products={props.products} />
 
-          {/* SELECTED PRODUCTS */}
-          <Section9 products={props.products}/>
-          <div style={{
-            display: "grid",
-            textAlign: "center",
-            paddingBottom: "1.5rem",
-          }}>
-            <H1> Four Gems Jewelry </H1>
-          </div>
-        </Box>
-        {/* SETTINGS IS USED ONLY FOR DEMO, YOU CAN REMOVE THIS */}
-        <Setting/>
-      </ShopLayout1>
-  );
+            // Attempt to decode the token
+            const decoded = jwtDecode(token);
+
+            if (decoded.role === 'staff') {
+                // Redirect to home page for staff
+                router.push('/');
+            } else {
+                router.push('/vendor/dashboard');
+
+            }
+        }
+    }, []);
+
+    return (
+
+        <ShopLayout1 topbarBgColor={theme.palette.grey[900]}>
+            <SEO title="FourGems"/>
+            <Box bgcolor="#FFFFFF">
+                {/* HERO SLIDER AND GRID */}
+                <Section1 carouselData={props.mainCarouselData}/>
+
+                {/* SERVICE CARDS */}
+                <Section2 serviceList={props.serviceList}/>
+
+                {/* CATEGORIES AND ANIMATED OFFER BANNER */}
+                <Section3 categories={props.categories}/>
+
+
+                {/* Necklaces */}
+                <Section5 products={showNecklaceProduct} />
+
+
+                {/*/!* Rings*!/*/}
+                <Section6 products={showRingProduct}/>
+
+
+                {/*/!* Earrings *!/*/}
+                <Section7 products={showEarringProduct}/>
+
+
+                {/*  Charm */}
+                <Section8 products={showRingProduct} />
+
+
+                {/* Brac */}
+                <Section9 products={showBracProduct}/>
+
+                <div style={{
+                    display: "grid",
+                    textAlign: "center",
+                    paddingBottom: "1.5rem",
+                }}>
+                    <H1> Four Gems Jewelry </H1>
+                </div>
+            </Box>
+            {/* SETTINGS IS USED ONLY FOR DEMO, YOU CAN REMOVE THIS */}
+            <Setting/>
+        </ShopLayout1>
+    );
 };
 
 export const getStaticProps = async () => {
-  const brands = await api.getBrands();
-  const products = await api.getProducts();
-  const serviceList = await api.getServices();
-  const categories = await api.getCategories();
-  const mainCarouselData = await api.getMainCarouselData();
-  const menFashionProducts = await api.getMenFashionProducts();
-  const electronicsProducts = await api.getElectronicsProducts();
-  const womenFashionProducts = await api.getWomenFashionProducts();
-  return {
-    props: {
-      brands,
-      products,
-      categories,
-      serviceList,
-      mainCarouselData,
-      menFashionProducts,
-      electronicsProducts,
-      womenFashionProducts,
-    },
-  };
+    const brands = await api.getBrands();
+    const products = await api.getProducts();
+    const serviceList = await api.getServices();
+    const categories = await api.getCategories();
+    const mainCarouselData = await api.getMainCarouselData();
+    const menFashionProducts = await api.getMenFashionProducts();
+    const electronicsProducts = await api.getElectronicsProducts();
+    const womenFashionProducts = await api.getWomenFashionProducts();
+    return {
+        props: {
+            brands,
+            products,
+            categories,
+            serviceList,
+            mainCarouselData,
+            menFashionProducts,
+            electronicsProducts,
+            womenFashionProducts,
+        },
+    };
 };
 export default Market;

@@ -12,7 +12,7 @@ export const mainCarouselData = [
   },
   {
     id: 2,
-    title: "test",
+    title: "Autumn Sale",
     category: "Memory Day Sale",
     discount: 35,
     imgUrl: "/assets/images/banners/lisa.jpeg",
@@ -87,9 +87,9 @@ export const categories = [
   },
   {
     id: "e13157eb-e9c5-4a24-a59b-98382b7eb3ea",
-    name: "Chokers",
+    name: "Charms",
     icon: null,
-    image: "/assets/images/categories/5.png",
+    image: "/assets/images/categories/charm.jpg",
     slug: "fashion",
     parent: [],
     description: null,
@@ -100,7 +100,7 @@ export const categories = [
   },
   {
     id: "c71a65bd-5c01-444e-82fe-3ef09462aff6",
-    name: "Sets",
+    name: "Collection",
     icon: null,
     image: "/assets/images/categories/6.png",
     slug: "cameras",

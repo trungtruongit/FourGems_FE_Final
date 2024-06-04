@@ -64,9 +64,9 @@ const ProductCard20 = ({ product }) => {
     const payload = {
       id: product.id,
       slug: product.slug,
-      name: product.title,
+      name: product.productName,
       price: product.price,
-      imgUrl: product.thumbnail,
+      imgUrl: product.image,
       qty: (cartItem?.qty || 0) + 1,
     };
     dispatch({
@@ -81,19 +81,19 @@ const ProductCard20 = ({ product }) => {
   return (
     <Card height="100%">
       <CardMedia>
-        <Link href={`/product/${product.slug}`}>
-          <a>
-            <Image
-              width={300}
-              height={300}
-              alt="category"
-              objectFit="cover"
-              layout="responsive"
-              className="product-img"
-              src={product.thumbnail}
-            />
-          </a>
-        </Link>
+        {/*<Link href={`/product/${product.slug}`}>*/}
+        {/*  <a>*/}
+        {/*    <Image*/}
+        {/*      width={300}*/}
+        {/*      height={300}*/}
+        {/*      alt="category"*/}
+        {/*      objectFit="cover"*/}
+        {/*      layout="responsive"*/}
+        {/*      className="product-img"*/}
+        {/*      src={decodeURIComponent(product?.image)}*/}
+        {/*    />*/}
+        {/*  </a>*/}
+        {/*</Link>*/}
 
         <AddToCartButton
           className="product-actions"
@@ -111,37 +111,37 @@ const ProductCard20 = ({ product }) => {
         </FavouriteButton>
       </CardMedia>
 
-      <ProductViewDialog
-        openDialog={openDialog}
-        handleCloseDialog={() => setOpenDialog(false)}
-        product={{
-          id: product.id,
-          slug: product.slug,
-          title: product.title,
-          price: product.price,
-          imgGroup: [product.thumbnail, product.thumbnail],
-        }}
-      />
+      {/*<ProductViewDialog*/}
+      {/*  openDialog={openDialog}*/}
+      {/*  handleCloseDialog={() => setOpenDialog(false)}*/}
+      {/*  product={{*/}
+      {/*    id: product.productId,*/}
+      {/*    // slug: product.slug,*/}
+      {/*    title: product.title,*/}
+      {/*    price: product.price,*/}
+      {/*    imgGroup: [product.image, product.image],*/}
+      {/*  }}*/}
+      {/*/>*/}
 
       <Box p={2} textAlign="center">
-        <Paragraph>{product.title}</Paragraph>
+        <Paragraph>{product.productName}</Paragraph>
         <H4 fontWeight={700} py={0.5}>
           {currency(product.price)}
         </H4>
 
-        <FlexRowCenter gap={1} mb={2}>
-          <Rating
-            name="read-only"
-            value={product.rating || 4}
-            readOnly
-            sx={{
-              fontSize: 14,
-            }}
-          />
-          <Small fontWeight={600} color="grey.500">
-            ({product.reviews.length})
-          </Small>
-        </FlexRowCenter>
+        {/*<FlexRowCenter gap={1} mb={2}>*/}
+        {/*  <Rating*/}
+        {/*    name="read-only"*/}
+        {/*    value={product.rating || 4}*/}
+        {/*    readOnly*/}
+        {/*    sx={{*/}
+        {/*      fontSize: 14,*/}
+        {/*    }}*/}
+        {/*  />*/}
+        {/*  <Small fontWeight={600} color="grey.500">*/}
+        {/*    ({product.reviews.length})*/}
+        {/*  </Small>*/}
+        {/*</FlexRowCenter>*/}
 
         <Button
           fullWidth

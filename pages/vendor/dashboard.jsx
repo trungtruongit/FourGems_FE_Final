@@ -34,7 +34,7 @@ export default function VendorDashboard(props) {
     const fetchOrder = async () => {
       try {
         //http://localhost:8080/user/get-user-information?userId=4
-        const resOrder = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/order/get-number-order-by-date?countId=1&startDate=2024-05-25&endDate=${endDate}`, {
+        const resOrder = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/order/get-number-order-by-date?countId=1&startDate=${endDate}&endDate=${endDate}`, {
           headers: {
             Authorization: 'Bearer ' + token //the token is a variable which holds the token
           }
@@ -54,7 +54,7 @@ export default function VendorDashboard(props) {
     const fetchOrderY = async () => {
       try {
         //http://localhost:8080/user/get-user-information?userId=4
-        const resOrderY = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/order/get-number-order-by-date?countId=1&startDate=2024-05-23&endDate=${yesEndDate}`, {
+        const resOrderY = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/order/get-number-order-by-date?countId=1&startDate=${yesStartDate}&endDate=${yesEndDate}`, {
           headers: {
             Authorization: 'Bearer ' + token //the token is a variable which holds the token
           }
@@ -72,7 +72,7 @@ export default function VendorDashboard(props) {
     const fetchItem = async () => {
       try {
         //http://localhost:8080/user/get-user-information?userId=4
-        const resItems = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/order/get-number-item-by-date?countId=1&startDate=2024-05-24&endDate=${endDate}`, {
+        const resItems = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/order/get-number-item-by-date?countId=1&startDate=${startDate}&endDate=${endDate}`, {
           headers: {
             Authorization: 'Bearer ' + token //the token is a variable which holds the token
           }
@@ -108,7 +108,7 @@ export default function VendorDashboard(props) {
     const fetchItemY = async () => {
       try {
         //http://localhost:8080/user/get-user-information?userId=4
-        const resItemsY = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/order/get-number-item-by-date?countId=1&startDate=2024-05-25&endDate=${yesEndDate}`, {
+        const resItemsY = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/order/get-number-item-by-date?countId=1&startDate=${yesStartDate}&endDate=${yesEndDate}`, {
           headers: {
             Authorization: 'Bearer ' + token //the token is a variable which holds the token
           }
