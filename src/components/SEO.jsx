@@ -1,7 +1,7 @@
 import Head from "next/head"; // ====================================================================
 
 // ====================================================================
-const SEO = ({ title, description, sitename = "QwikShop" }) => {
+const SEO = ({ title, description, sitename = "Authentic" }) => {
   return (
     <Head>
       <title>{`${title} | ${sitename}`}</title>

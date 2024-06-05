@@ -20,7 +20,7 @@ const checkoutSchema = yup.object({
   zip: yup.number().required("required"),
 });
 const initialValues = {
-  name: "QwikShop",
+  name: "FourGems",
   street1: "EE 738, DD NAGAR",
   street2: "",
   phone: "6265081928",

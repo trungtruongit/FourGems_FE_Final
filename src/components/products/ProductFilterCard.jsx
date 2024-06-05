@@ -43,7 +43,7 @@ const ProductFilterCard = () => {
                 pl="22px"
                 py={0.75}
                 key={name}
-                fontSize="14px"
+                fontSize="18px"
                 color="grey.600"
                 sx={{
                   cursor: "pointer",
@@ -56,7 +56,7 @@ const ProductFilterCard = () => {
         ) : (
           <Paragraph
             py={0.75}
-            fontSize="14px"
+            fontSize="18px"
             color="grey.600"
             key={item.title}
             className="cursor-pointer"
@@ -167,17 +167,16 @@ const ProductFilterCard = () => {
 
 const categroyList = [
   {
-    title: "Bath Preparations",
-    subCategories: ["Bubble Bath", "Bath Capsules", "Others"],
+    title: "Necklaces",
   },
   {
-    title: "Eye Makeup Preparations",
+    title: "Ring",
   },
   {
-    title: "Fragrance",
+    title: "Earning",
   },
   {
-    title: "Hair Preparations",
+    title: "Bracelets",
   },
 ];
 // const brandList = ["Maccs", "Karts", "Baars", "Bukks", "Luasis"];

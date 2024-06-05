@@ -137,6 +137,7 @@ export default function ProductList(props) {
   );
 }
 export const getStaticProps = async () => {
+  // const products = await api.products();
   const products = await api.products();
   return {
     props: {
