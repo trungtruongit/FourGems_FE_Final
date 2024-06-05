@@ -7,11 +7,15 @@ import {
     StyledTableRow,
 } from "./StyledComponents";
 import {currency} from "lib";
-import axios from "axios"; // ========================================================================
+import axios from "axios";
+import {useRouter} from "next/router";
+import {useState} from "react"; // ========================================================================
 
 // ========================================================================
 const CustomerRow = ({customer}) => {
     const {id, fullName, phoneNumber, address, roleName, revenue} = customer;
+    const router = useRouter();
+    const [update, setUpdate] = useState();
     let token = '';
     if (typeof localStorage !== 'undefined') {
         token = localStorage.getItem('token');
@@ -21,6 +25,22 @@ const CustomerRow = ({customer}) => {
     } else {
         // If neither localStorage nor sessionStorage is supported
         console.log('Web Storage is not supported in this environment.');
+    }
+    const handleUpdateUser = async () => {
+        try {
+            const respone = await axios.post(`https://four-gems-api-c21adc436e90.herokuapp.com/user/get-user-information`, {
+                headers: {
+                    Authorization: 'Bearer ' + token
+                },
+            });
+            setUpdate(respone.data.data);
+            console.log(respone.data.data);
+            console.log("OK")
+        } catch (error) {
+            console.error("Failed to update account:", error);
+        }finally {
+            await router.push('/admin/users/update')
+        }
     }
     const handleDeleteUser = async () => {
         try {
@@ -79,10 +99,9 @@ const CustomerRow = ({customer}) => {
             </StyledTableCell>
 
             <StyledTableCell align="center">
-                <StyledIconButton>
+                <StyledIconButton onClick={() => handleUpdateUser()}>
                     <Edit/>
                 </StyledIconButton>
-
                 <StyledIconButton onClick={() => handleDeleteUser()}>
                     <Delete/>
                 </StyledIconButton>
