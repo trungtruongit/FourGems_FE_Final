@@ -82,13 +82,14 @@ export default function CustomerList({initialCustomers}) {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const respone = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/user/get-all`, {}, {
+                const response = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/user/get-all`, {
                     headers: {
-                        Authorization: 'Bearer ' + 'token' //the token is a variable which holds the token
+                        Authorization: 'Bearer ' + token //the token is a variable which holds the token
                     }
                 });
-                setCustomers(respone.data);
-                console.log(respone.data.data);
+
+                console.log(response);
+
             } catch (error) {
                 console.error("Failed to fetch customers:", error);
             } finally {

@@ -11,7 +11,8 @@ import {ProductRow} from "pages-sections/admin";
 import api from "utils/__api__/dashboard";
 import {useRouter} from 'next/router';
 import axios from "axios";
-import {token} from "stylis";
+
+import {useEffect, useState} from "react";
 
 // TABLE HEADING DATA LIST
 const tableHeading = [
@@ -47,22 +48,24 @@ ProductList.getLayout = function getLayout(page) {
 }; // =============================================================================
 
 // =============================================================================
-export default function ProductList(props) {
+export default function ProductList({initialProducts}) {
+    const [products, setProducts] = useState(initialProducts);
+    const [loading, setLoading] = useState(false);
+    const router = useRouter();
 
-    const {products} = props; // RESHAPE THE PRODUCT LIST BASED TABLE HEAD CELL ID
-    const router = useRouter()
-    const hadleNav = () => {
-        router.push('/admin/products/create')
+    const handleNav = () => {
+        router.push('/admin/products/create');
+    };
+
+    let token = '';
+    if (typeof localStorage !== 'undefined') {
+        token = localStorage.getItem('token');
+    } else if (typeof sessionStorage !== 'undefined') {
+        token = sessionStorage.getItem('token');
+    } else {
+        console.log('Web Storage is not supported in this environment.');
     }
-    const filteredProducts = products.map((item) => ({
-        productId: item.productId,
-        productName: item.productName,
-        description: item.description,
-        price: item.price,
-        image: item.image,
-        published: item.published,
-        categoryName: item.categoryName,
-    }));
+
     const {
         order,
         orderBy,
@@ -72,18 +75,42 @@ export default function ProductList(props) {
         handleChangePage,
         handleRequestSort,
     } = useMuiTable({
-        listData: filteredProducts,
+        listData: products,
     });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            console.log(token)
+            setLoading(true);
+            try {
+                if (token) {
+                    const response = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product`, {
+                        headers: {
+                            Authorization: `Bearer ` + token
+                        }
+                    });
+                    setProducts(response.data.data);
+                    console.log(response.data.data);
+                } else {
+                    console.warn("Token is missing. Please ensure it's properly set.");
+                }
+            } catch (error) {
+                console.error("Failed to fetch products:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
+    }, [token]);
+
     return (
         <Box py={4}>
             <H3>Product List</H3>
 
-
             <SearchArea
-                handleSearch={() => {
-                }}
+                handleSearch={() => {}}
                 buttonText="Add Product"
-                handleBtnClick={hadleNav}
+                handleBtnClick={handleNav}
                 searchPlaceholder="Search Product..."
             />
             <Card>
@@ -99,14 +126,14 @@ export default function ProductList(props) {
                                 hideSelectBtn
                                 orderBy={orderBy}
                                 heading={tableHeading}
-                                rowCount={products.length}
+                                rowCount={filteredList.length}
                                 numSelected={selected.length}
                                 onRequestSort={handleRequestSort}
                             />
 
                             <TableBody>
-                                {filteredList.map((product, index) => (
-                                    <ProductRow product={product} key={index}/>
+                                {filteredList.map((product) => (
+                                    <ProductRow product={product} key={product.productId}/>
                                 ))}
                             </TableBody>
                         </Table>
@@ -116,32 +143,28 @@ export default function ProductList(props) {
                 <Stack alignItems="center" my={4}>
                     <TablePagination
                         onChange={handleChangePage}
-                        count={Math.ceil(products.length / rowsPerPage)}
+                        count={Math.ceil(filteredList.length / rowsPerPage)}
                     />
                 </Stack>
             </Card>
         </Box>
     );
 }
+
 export const getStaticProps = async () => {
-    let token = '';
-    if (typeof localStorage !== 'undefined') {
-        token = localStorage.getItem('token');
-    } else if (typeof sessionStorage !== 'undefined') {
-        // Fallback to sessionStorage if localStorage is not supported
-        token = localStorage.getItem('token');
-    } else {
-        // If neither localStorage nor sessionStorage is supported
-        console.log('Web Storage is not supported in this environment.');
+    try {
+        const products = await api.customers();
+        return {
+            props: {
+                initialProducts: products,
+            },
+        };
+    } catch (error) {
+        console.error("Failed to fetch initial products:", error);
+        return {
+            props: {
+                initialProducts: [],
+            },
+        };
     }
-    const products = await axios.get("https://four-gems-api-c21adc436e90.herokuapp.com/product/show-all-product-from-warehouse?pageSize=1000&page=0&sortKeyword=productId&sortType=DESC&categoryName= &searchKeyword= ", {
-        headers: {
-            Authorization: 'Bearer ' + token
-        },
-    });
-    return {
-        props: {
-            products,
-        },
-    };
 };
