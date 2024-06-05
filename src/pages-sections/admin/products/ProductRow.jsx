@@ -12,14 +12,34 @@ import {
     StyledTableCell,
     StyledIconButton,
 } from "../StyledComponents";
-import axios from "axios"; // ========================================================================
+import axios from "axios";
+import {token} from "stylis"; // ========================================================================
 
 // ========================================================================
 const ProductRow = ({product}) => {
     const {productName, price, image, description, productId, categoryName} = product;
     const router = useRouter();
-    const ProductBox = ({ productName, productId }) => {
-        const productCode = productId ? productId.split("-")[0] : "N/A";
+    let token = '';
+    if (typeof localStorage !== 'undefined') {
+        token = localStorage.getItem('token');
+    } else if (typeof sessionStorage !== 'undefined') {
+        // Fallback to sessionStorage if localStorage is not supported
+        token = localStorage.getItem('token');
+    } else {
+        // If neither localStorage nor sessionStorage is supported
+        console.log('Web Storage is not supported in this environment.');
+    }
+    const handleDeleteProduct = async (id) => {
+        try {
+            await axios.delete(`https://four-gems-api-c21adc436e90.herokuapp.com/product/delete-product?productId=${id}`,{
+                headers: {
+                    Authorization: 'Bearer ' + token
+                }
+            });
+            window.location.reload();
+        } catch (e) {
+            console.log("Failed to delete product", e);
+        }
     }
     return (
         <StyledTableRow tabIndex={-1} role="checkbox">
@@ -33,7 +53,7 @@ const ProductRow = ({product}) => {
                     />
                     <Box>
                         <Paragraph>{productName}</Paragraph>
-                        <Small color="grey.600">#{ProductBox}</Small>
+                        <Small color="grey.600">#{productId}</Small>
                     </Box>
                 </FlexBox>
             </StyledTableCell>
@@ -56,7 +76,7 @@ const ProductRow = ({product}) => {
                 </StyledIconButton>
 
 
-                <StyledIconButton>
+                <StyledIconButton onClick={() => handleDeleteProduct}>
                     <Delete/>
                 </StyledIconButton>
             </StyledTableCell>
