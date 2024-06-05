@@ -84,7 +84,7 @@ export default function ProductList({initialProducts}) {
             setLoading(true);
             try {
                 if (token) {
-                    const response = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product`, {
+                    const response = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=1000&page=0&sortKeyword=productId&sortType=DESC&categoryName= &searchKeyword= `, {
                         headers: {
                             Authorization: `Bearer ` + token
                         }
@@ -101,7 +101,7 @@ export default function ProductList({initialProducts}) {
             }
         };
         fetchData();
-    }, [token]);
+    }, []);
 
     return (
         <Box py={4}>
