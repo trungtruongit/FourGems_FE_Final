@@ -61,7 +61,10 @@ const Login = () => {
         console.log(`http://localhost:8080/user/signin?username=${email}&password=${password}`)
 
         try {
-            const response = await axios.post(`https://four-gems-api-c21adc436e90.herokuapp.com/user/signin?username=${email}&password=${password}`)
+            const response = await axios.post(`https://four-gems-api-c21adc436e90.herokuapp.com/user/signin?username=${email}&password=${password}`, {
+                "username": email,
+                "password": password
+            })
             console.log(response.data)
             if (response.data.data !== "") {
                 console.log("successfully logged in")
