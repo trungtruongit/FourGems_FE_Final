@@ -1,17 +1,18 @@
-import { Button, Box, Card, Stack, Table, TableContainer } from "@mui/material";
+import {Box, Card, Stack, Table, TableContainer} from "@mui/material";
 import TableBody from "@mui/material/TableBody";
+import {H3} from "components/Typography";
+import Scrollbar from "components/Scrollbar";
 import SearchArea from "components/dashboard/SearchArea";
 import TableHeader from "components/data-table/TableHeader";
 import TablePagination from "components/data-table/TablePagination";
 import VendorDashboardLayout from "components/layouts/vendor-dashboard";
-import { H3 } from "components/Typography";
 import useMuiTable from "hooks/useMuiTable";
-import Scrollbar from "components/Scrollbar";
-import { ProductRow } from "pages-sections/admin";
+import {CustomerRow} from "pages-sections/admin";
 import api from "utils/__api__/dashboard";
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
+import {useEffect, useState} from "react";
+import axios from "axios";
 
-// TABLE HEADING DATA LIST
 const tableHeading = [
     {
         id: "name",
@@ -19,23 +20,23 @@ const tableHeading = [
         align: "left",
     },
     {
-        id: "category",
-        label: "Category",
+        id: "phone",
+        label: "Phone",
         align: "left",
     },
     {
-        id: "brand",
-        label: "Brand",
+        id: "address",
+        label: "Address",
         align: "left",
     },
     {
-        id: "price",
-        label: "Price",
+        id: "revenue",
+        label: "Revenue",
         align: "left",
     },
     {
-        id: "published",
-        label: "Published",
+        id: "roleName",
+        label: "Role Name",
         align: "left",
     },
     {
@@ -43,31 +44,29 @@ const tableHeading = [
         label: "Action",
         align: "center",
     },
-]; // =============================================================================
+];
 
-ProductList.getLayout = function getLayout(page) {
+CustomerList.getLayout = function getLayout(page) {
     return <VendorDashboardLayout>{page}</VendorDashboardLayout>;
-}; // =============================================================================
+};
 
-// =============================================================================
-export default function ProductList(props) {
-    const { products } = props; // RESHAPE THE PRODUCT LIST BASED TABLE HEAD CELL ID
-    const router = useRouter()
-    const hadleNav = () => {
-        router.push('/admin/products/create')
+export default function CustomerList({initialCustomers}) {
+    const [customers, setCustomers] = useState(initialCustomers);
+    const [loading, setLoading] = useState(false);
+    const router = useRouter(); // useRouter should be called inside the component
+    let token = '';
+    if (typeof localStorage !== 'undefined') {
+        token = localStorage.getItem('token');
+    } else if (typeof sessionStorage !== 'undefined') {
+        // Fallback to sessionStorage if localStorage is not supported
+        token = localStorage.getItem('token');
+    } else {
+        // If neither localStorage nor sessionStorage is supported
+        console.log('Web Storage is not supported in this environment.');
     }
-    const hadleNav1 = () => {
-        router.push('/admin/categories')
-    }
-    const filteredProducts = products.map((item) => ({
-        id: item.id,
-        name: item.title,
-        brand: item.brand,
-        price: item.price,
-        image: item.thumbnail,
-        published: item.published,
-        category: item.categories[0],
-    }));
+    const handleNav = () => {
+        router.push('/admin/users/create');
+    };
     const {
         order,
         orderBy,
@@ -77,30 +76,46 @@ export default function ProductList(props) {
         handleChangePage,
         handleRequestSort,
     } = useMuiTable({
-        listData: filteredProducts,
+        listData: customers,
     });
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                const respone = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/user/get-all`, {
+                    headers: {
+                        Authorization: 'Bearer ' + token //the token is a variable which holds the token
+                    }
+                });
+                setCustomers(respone.data.data);
+                console.log(respone.data.data);
+            } catch (error) {
+                console.error("Failed to fetch customers:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
     return (
         <Box py={4}>
-            <H3>Product List</H3>
-            <Button size="small" color="info" variant="outlined" sx={{
-                position: "absolute",
-                bottom: "517px",
-                right: "250px",
-                height: "44px",
-                width: "144.74px",
-                color: "#FFFFFF",
-                backgroundColor: "#4E97FD"
-            }} onClick={hadleNav1}>
-                All Categories</Button>
+            <H3 mb={2}>Users</H3>
+
             <SearchArea
                 handleSearch={() => {
                 }}
-                buttonText="Add Product"
-                handleBtnClick={hadleNav}
-                searchPlaceholder="Search Product..."
+                buttonText="Add User"
+                handleBtnClick={handleNav} // use handleNav function
+                searchPlaceholder="Search User..."
             />
+
             <Card>
-                <Scrollbar autoHide={false}>
+                <Scrollbar>
                     <TableContainer
                         sx={{
                             minWidth: 900,
@@ -112,14 +127,14 @@ export default function ProductList(props) {
                                 hideSelectBtn
                                 orderBy={orderBy}
                                 heading={tableHeading}
-                                rowCount={products.length}
                                 numSelected={selected.length}
+                                rowCount={filteredList.length}
                                 onRequestSort={handleRequestSort}
                             />
 
                             <TableBody>
-                                {filteredList.map((product, index) => (
-                                    <ProductRow product={product} key={index}/>
+                                {filteredList.map((customer) => (
+                                    <CustomerRow customer={customer} key={customer.id}/>
                                 ))}
                             </TableBody>
                         </Table>
@@ -129,18 +144,19 @@ export default function ProductList(props) {
                 <Stack alignItems="center" my={4}>
                     <TablePagination
                         onChange={handleChangePage}
-                        count={Math.ceil(products.length / rowsPerPage)}
+                        count={Math.ceil(filteredList.length / rowsPerPage)}
                     />
                 </Stack>
             </Card>
         </Box>
     );
 }
+
 export const getStaticProps = async () => {
-    const products = await api.products();
+    const customers = await api.customers();
     return {
         props: {
-            products,
+            initialCustomers: customers,
         },
     };
 };
