@@ -109,26 +109,24 @@ const ProductViewDialog = (props) => {
             <Grid item md={6} xs={12} alignSelf="center">
               <H2>{product.title}</H2>
 
-              <Paragraph py={1} color="grey.500" fontWeight={600} fontSize={13}>
-                CATEGORY: Cosmetic
+              <Paragraph py={1} color="grey.500" fontWeight={600} fontSize={13} >
+                {product.categoryItem}
               </Paragraph>
 
               <H1 color="primary.main">{currency(product.price)}</H1>
 
-              <FlexBox alignItems="center" gap={1}>
-                <BazaarRating
-                  color="warn"
-                  fontSize="1.25rem"
-                  value={4}
-                  readOnly
-                />
-                <H6 lineHeight="1">(50)</H6>
-              </FlexBox>
+              {/*<FlexBox alignItems="center" gap={1}>*/}
+              {/*  <BazaarRating*/}
+              {/*    color="warn"*/}
+              {/*    fontSize="1.25rem"*/}
+              {/*    value={4}*/}
+              {/*    readOnly*/}
+              {/*  />*/}
+              {/*  <H6 lineHeight="1">(50)</H6>*/}
+              {/*</FlexBox>*/}
 
               <Paragraph my={2}>
-                Sed egestas, ante et vulputate volutpat, eros pede semper est,
-                vitae luctus metus libero eu augue. Morbi purus liberpuro ate
-                vol faucibus adipiscing.
+                {product.description}
               </Paragraph>
 
               <Divider

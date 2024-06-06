@@ -136,17 +136,11 @@ const SearchBox = () => {
 const categories = [
     "All Categories",
     "Necklace",
-    "Clothe",
     "Ring",
     "Earring",
     "Charm",
     "Bracelet",
 
 ];
-const dummySearchResult = [
-    "Macbook Air 13",
-    "Asus K555LA",
-    "Acer Aspire X453",
-    "iPad Mini 3",
-];
+
 export default SearchBox;

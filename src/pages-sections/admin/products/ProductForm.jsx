@@ -44,8 +44,6 @@ const ProductForm = (props) => {
         initialValues,
         validationSchema,
         handleFormSubmit,
-        setProductPublish,
-        productPublish,
         files,
         setFiles
     } = props;

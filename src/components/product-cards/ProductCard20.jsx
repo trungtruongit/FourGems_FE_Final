@@ -78,22 +78,34 @@ const ProductCard20 = ({ product }) => {
     });
   };
 
+  // Your base64-encoded image string
+  const base64Image = product?.image;
+
+  // Decode the base64 string
+  const binaryImage = Buffer.from(base64Image, "base64");
+
+  // Convert the binary data to a data URL
+  const imageUrl = `data:image/png;base64,${binaryImage.toString("base64")}`;
+
+
+
   return (
     <Card height="100%">
       <CardMedia>
-        {/*<Link href={`/product/${product.slug}`}>*/}
-        {/*  <a>*/}
-        {/*    <Image*/}
-        {/*      width={300}*/}
-        {/*      height={300}*/}
-        {/*      alt="category"*/}
-        {/*      objectFit="cover"*/}
-        {/*      layout="responsive"*/}
-        {/*      className="product-img"*/}
-        {/*      src={decodeURIComponent(product?.image)}*/}
-        {/*    />*/}
-        {/*  </a>*/}
-        {/*</Link>*/}
+        <Link href={`/product/${product.slug}`}>
+          <a>
+            <Image
+              width={300}
+              height={300}
+              objectFit="cover"
+              layout="responsive"
+              className="product-img"
+              // src={decodeURIComponent(product?.image)}
+              src={imageUrl}
+              alt="Loading"
+            />
+          </a>
+        </Link>
 
         <AddToCartButton
           className="product-actions"
@@ -102,27 +114,28 @@ const ProductCard20 = ({ product }) => {
           <RemoveRedEye color="disabled" fontSize="small" />
         </AddToCartButton>
 
-        <FavouriteButton className="product-actions" onClick={handleFavorite}>
-          {isFavorite ? (
-            <Favorite color="primary" fontSize="small" />
-          ) : (
-            <FavoriteBorder color="disabled" fontSize="small" />
-          )}
-        </FavouriteButton>
+        {/*<FavouriteButton className="product-actions" onClick={handleFavorite}>*/}
+        {/*  {isFavorite ? (*/}
+        {/*    <Favorite color="primary" fontSize="small" />*/}
+        {/*  ) : (*/}
+        {/*    <FavoriteBorder color="disabled" fontSize="small" />*/}
+        {/*  )}*/}
+        {/*</FavouriteButton>*/}
       </CardMedia>
 
-      {/*<ProductViewDialog*/}
-      {/*  openDialog={openDialog}*/}
-      {/*  handleCloseDialog={() => setOpenDialog(false)}*/}
-      {/*  product={{*/}
-      {/*    id: product.productId,*/}
-      {/*    // slug: product.slug,*/}
-      {/*    title: product.title,*/}
-      {/*    price: product.price,*/}
-      {/*    imgGroup: [product.image, product.image],*/}
-      {/*  }}*/}
-      {/*/>*/}
-
+      <ProductViewDialog
+        openDialog={openDialog}
+        handleCloseDialog={() => setOpenDialog(false)}
+        product={{
+          id: product.productId,
+          slug: product.slug,
+          title: product.productName,
+          price: product.price,
+          categoryItem: product.categoryItem,
+          imgGroup: [imageUrl, imageUrl],
+          description: product.description,
+        }}
+      />
       <Box p={2} textAlign="center">
         <Paragraph>{product.productName}</Paragraph>
         <H4 fontWeight={700} py={0.5}>
