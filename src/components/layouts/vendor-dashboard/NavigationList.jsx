@@ -154,9 +154,9 @@ export const navigations = [
   //   icon: duotone.SiteSetting,
   //   path: "/vendor/site-settings",
   // },
-  {
-    name: "Home",
-    icon: duotone.Session,
-    path: "/",
-  },
+  // {
+  //   name: "Home",
+  //   icon: duotone.Session,
+  //   path: "/",
+  // },
 ];

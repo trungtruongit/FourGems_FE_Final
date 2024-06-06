@@ -1,7 +1,11 @@
 export const fontSize = 14;
 export const fontFamily = [
-  "Playball",
+  "Montserrat",
+  // "Roboto",
+  // "Outift",
+  //   "Ubuntu_Sans",
   "Ubuntu",
+
 ].join(",");
 export const typography = {
   fontSize,

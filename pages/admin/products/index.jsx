@@ -80,7 +80,6 @@ export default function ProductList({initialProducts}) {
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log(token)
             setLoading(true);
             try {
                 if (token) {
@@ -90,7 +89,6 @@ export default function ProductList({initialProducts}) {
                         }
                     });
                     setProducts(response.data.data);
-                    console.log(response.data.data);
                 } else {
                     console.warn("Token is missing. Please ensure it's properly set.");
                 }

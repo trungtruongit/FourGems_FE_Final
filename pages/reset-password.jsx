@@ -55,15 +55,16 @@ const ResetPassword = () => {
           </form>
 
           <FlexRowCenter mt="1.25rem" justifyContent="center" width="100%">
-            <Box>Don&apos;t have account?</Box>
+            <Box>Don&apos;t have account? Contact to admin.</Box>
             <Link href="/signup" passHref legacyBehavior>
               <a>
-                <H6 ml={1} borderBottom="1px solid" borderColor="grey.900">
-                  Sign Up
-                </H6>
+                {/*<H6 ml={1} borderBottom="1px solid" borderColor="grey.900">*/}
+                {/*  Sign Up*/}
+                {/*</H6>*/}
               </a>
             </Link>
           </FlexRowCenter>
+
         </FlexBox>
       </Card>
     </FlexRowCenter>

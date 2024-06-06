@@ -29,13 +29,15 @@ const ProductRow = ({product}) => {
         // If neither localStorage nor sessionStorage is supported
         console.log('Web Storage is not supported in this environment.');
     }
-    const handleDeleteProduct = async (id) => {
+    const handleDeleteProduct = async (productId) => {
+        console.log(productId)
         try {
-            await axios.delete(`https://four-gems-api-c21adc436e90.herokuapp.com/product/delete-product?productId=${id}`,{
+            await axios.delete(`https://four-gems-api-c21adc436e90.herokuapp.com/product/delete-product?productId=${productId}`,{
                 headers: {
                     Authorization: 'Bearer ' + token
                 }
             });
+            await axios.put(`https://four-gems-api-c21adc436e90.herokuapp.com/product/delete-product?productId=${productId}`,{}, {});
             window.location.reload();
         } catch (e) {
             console.log("Failed to delete product", e);
@@ -76,7 +78,7 @@ const ProductRow = ({product}) => {
                 </StyledIconButton>
 
 
-                <StyledIconButton onClick={() => handleDeleteProduct}>
+                <StyledIconButton onClick={() => handleDeleteProduct()}>
                     <Delete/>
                 </StyledIconButton>
             </StyledTableCell>
