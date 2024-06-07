@@ -89,7 +89,7 @@ const Market = (props) => {
             const token = localStorage.getItem("token");
             try {
 
-                const resNecklacesProduct = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=price&sortType= &categoryName=earring&searchKeyword= `, {
+                const resNecklacesProduct = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=price&sortType= &categoryName=necklace&searchKeyword= `, {
                     headers: {
                         Authorization: 'Bearer ' + token //the token is a variable which holds the token
                     }
