@@ -47,8 +47,11 @@ const ProductForm = (props) => {
         files,
         setFiles
     } = props;
-    const handleChangeDropZone = (files) => {
-        const updatedFiles = files.map((file) => {
+
+    const handleChangeDropZone = (incomingFiles) => {
+        const jpegFiles = incomingFiles.filter(file => file.type === 'image/jpeg');
+
+        jpegFiles.forEach((file) => {
             const reader = new FileReader();
             reader.onloadend = () => {
                 setFiles((prevFiles) => [
@@ -57,12 +60,11 @@ const ProductForm = (props) => {
                 ]);
             };
             reader.readAsDataURL(file);
-            return file;
         });
     };
 
-    const handleFileDelete = (file) => () => {
-        setFiles((files) => files.filter((item) => item.name !== file.name));
+    const handleFileDelete = (fileToDelete) => {
+        setFiles((files) => files.filter((item) => item.file.name !== fileToDelete.file.name));
     };
 
 
@@ -120,18 +122,34 @@ const ProductForm = (props) => {
                                 />
                             </Grid>
 
+                            {/*<Grid item xs={12}>*/}
+                            {/*    <DropZone onChange={(files) => handleChangeDropZone(files)}/>*/}
+
+                            {/*    <FlexBox flexDirection="row" mt={2} flexWrap="wrap" gap={1}>*/}
+                            {/*        {files.map((file, index) => (*/}
+                            {/*            <UploadImageBox key={index}>*/}
+                            {/*                <BazaarImage src={file.preview} width="100%"/>*/}
+                            {/*                <StyledClear onClick={() => handleFileDelete(file)}/>*/}
+
+                            {/*            </UploadImageBox>*/}
+                            {/*        ))}*/}
+
+                            {/*    </FlexBox>*/}
+                            {/*</Grid>*/}
+
                             <Grid item xs={12}>
-                                <DropZone onChange={(files) => handleChangeDropZone(files)}/>
+                                <DropZone
+                                    accept="image/jpeg"
+                                    onChange={(files) => handleChangeDropZone(files)}
+                                />
 
                                 <FlexBox flexDirection="row" mt={2} flexWrap="wrap" gap={1}>
                                     {files.map((file, index) => (
                                         <UploadImageBox key={index}>
-                                            <BazaarImage src={file.preview} width="100%"/>
-                                            <StyledClear onClick={() => handleFileDelete(file)}/>
-
+                                            <BazaarImage src={file.preview} width="100%" />
+                                            <StyledClear onClick={() => handleFileDelete(file)} />
                                         </UploadImageBox>
                                     ))}
-
                                 </FlexBox>
                             </Grid>
 

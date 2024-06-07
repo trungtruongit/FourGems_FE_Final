@@ -81,13 +81,17 @@ const ProductCard20 = ({ product }) => {
   // Your base64-encoded image string
   const base64Image = product?.image;
 
-  // Decode the base64 string
-  const binaryImage = Buffer.from(base64Image, "base64");
+  // // Decode the base64 string
+  // const binaryImage = Buffer.from(base64Image, "base64");
 
-  // Convert the binary data to a data URL
-  const imageUrl = `data:image/png;base64,${binaryImage.toString("base64")}`;
+  // // Convert the binary data to a data URL
+  // const imageUrl = `data:image/png;base64,${binaryImage.toString("base64")}`;
 
+  // Convert the binary data to a Base64 encoded string
+  const base64String = base64Image.toString('base64');
 
+  // Construct the URL with the base64 encoded string
+  const imageUrl = `data:image/jpeg;base64,${base64String}`;
 
   return (
     <Card height="100%">
