@@ -1,45 +1,75 @@
 import { Box } from "@mui/material";
 import * as yup from "yup";
 import { H3 } from "components/Typography";
-import { ProductForm } from "pages-sections/admin";
-import VendorDashboardLayout from "components/layouts/vendor-dashboard"; // form field validation schema
-
-const validationSchema = yup.object().shape({
-  name: yup.string().required("required"),
-  category: yup.string().required("required"),
-  description: yup.string().required("required"),
-  stock: yup.number().required("required"),
-  price: yup.number().required("required"),
-  sale_price: yup.number().required("required"),
-  tags: yup.object().required("required"),
-}); // =============================================================================
-
-EditProduct.getLayout = function getLayout(page) {
+import VendorDashboardLayout from "components/layouts/vendor-dashboard";
+import axios from "axios";
+import UpdateAccountForm from "../../../src/pages-sections/admin/accounts/UpdateAccountForm";
+import {useRouter} from "next/router";
+import {useEffect, useState} from "react";
+UpdateAccount.getLayout = function getLayout(page) {
   return <VendorDashboardLayout>{page}</VendorDashboardLayout>;
 }; // =============================================================================
 
-export default function EditProduct() {
+export default function UpdateAccount() {
+  const router = useRouter()
+  const [update, setUpdate] = useState();
+  console.log(update)
+  useEffect(() => {
+    let token = '';
+    if (typeof localStorage !== 'undefined') {
+      token = localStorage.getItem('token');
+    } else if (typeof sessionStorage !== 'undefined') {
+      // Fallback to sessionStorage if localStorage is not supported
+      token = localStorage.getItem('token');
+    } else {
+      // If neither localStorage nor sessionStorage is supported
+      console.log('Web Storage is not supported in this environment.');
+    }
+    const handleGetUser = async () => {
+      try {
+        const respone = await axios.post(`https://four-gems-api-c21adc436e90.herokuapp.com/user/get-user-information?userId=${router.query.id}`, {
+          "userId": router.query.id,
+        },{
+          headers: {
+            Authorization: 'Bearer ' + token
+          },
+        });
+        setUpdate(respone.data.data);
+        console.log(respone.data.data);
+      } catch (error) {
+        console.error("Failed to update account:", error);
+      }
+    }
+    handleGetUser()
+  }, []);
   const INITIAL_VALUES = {
-    name: "",
-    tags: "",
-    stock: "",
-    price: "",
-    category: "",
-    sale_price: "",
-    description: "",
+    username: update?.username,
+    fullName: update?.fullName,
+    address: update?.address,
+    phoneNumber: update?.phoneNumber,
+    roleName: update?.roleName,
+    revenue: update?.revenue,
   };
-
-  const handleFormSubmit = () => {};
-
+  const validationSchema = yup.object().shape({
+    username: yup.string().required("required"),
+    fullName: yup.string().required("required"),
+    address: yup.string().required("required"),
+    phoneNumber: yup.string().required("required"),
+    roleName: yup.string().required("required"),
+    revenue: yup.string().required("required"),
+  });
+  const handleFormSubmit = async (values) => {
+    console.log(values)
+  };
   return (
-    <Box py={4}>
-      <H3 mb={2}>Edit User</H3>
+      <Box py={4}>
+        <H3 mb={2}>Update User</H3>
 
-      <ProductForm
-        initialValues={INITIAL_VALUES}
-        validationSchema={validationSchema}
-        handleFormSubmit={handleFormSubmit}
-      />
-    </Box>
+        <UpdateAccountForm
+            initialValues={INITIAL_VALUES}
+            validationSchema={validationSchema}
+            handleFormSubmit={handleFormSubmit}
+        />
+      </Box>
   );
 }
