@@ -151,7 +151,7 @@ export default function ProductList({initialProducts}) {
 
 export const getStaticProps = async () => {
     try {
-        const products = await api.customers();
+        const products = await api.products();
         return {
             props: {
                 initialProducts: products,
