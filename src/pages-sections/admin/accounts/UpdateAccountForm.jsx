@@ -32,12 +32,12 @@ const UpdateAccountForm = (props) => {
                             <Grid item sm={6} xs={12}>
                                 <TextField
                                     fullWidth
-                                    name="userName"
+                                    name="username"
                                     label="User Name"
                                     color="info"
                                     size="medium"
                                     placeholder="User Name"
-                                    value={values.userName}
+                                    value={values.username}
                                     onBlur={handleBlur}
                                     onChange={handleChange}
                                     error={!!touched.name && !!errors.name}
@@ -47,12 +47,12 @@ const UpdateAccountForm = (props) => {
                             <Grid item sm={6} xs={12}>
                                 <TextField
                                     fullWidth
-                                    name="name"
+                                    name="fullName"
                                     label="Full Name"
                                     color="info"
                                     size="medium"
                                     placeholder="Full Name"
-                                    value={values.name}
+                                    value={values.fullName}
                                     onBlur={handleBlur}
                                     onChange={handleChange}
                                     error={!!touched.name && !!errors.name}
@@ -77,21 +77,6 @@ const UpdateAccountForm = (props) => {
                             <Grid item sm={6} xs={12}>
                                 <TextField
                                     fullWidth
-                                    name="email"
-                                    label="Email"
-                                    color="info"
-                                    size="medium"
-                                    placeholder="Email"
-                                    value={values.email}
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    error={!!touched.name && !!errors.name}
-                                    helperText={touched.name && errors.name}
-                                />
-                            </Grid>
-                            <Grid item sm={6} xs={12}>
-                                <TextField
-                                    fullWidth
                                     name="phoneNumber"
                                     label="Phone Number"
                                     color="info"
@@ -107,12 +92,12 @@ const UpdateAccountForm = (props) => {
                             <Grid item sm={6} xs={12}>
                                 <TextField
                                     fullWidth
-                                    name="password"
-                                    label="Password"
+                                    name="roleName"
+                                    label="Role Name"
                                     color="info"
                                     size="medium"
-                                    placeholder="Password"
-                                    value={values.password}
+                                    placeholder="Role Name"
+                                    value={values.roleName}
                                     onBlur={handleBlur}
                                     onChange={handleChange}
                                     error={!!touched.name && !!errors.name}
@@ -121,42 +106,18 @@ const UpdateAccountForm = (props) => {
                             </Grid>
                             <Grid item sm={6} xs={12}>
                                 <TextField
-                                    select
                                     fullWidth
+                                    name="revenue"
+                                    label="Revenue"
                                     color="info"
                                     size="medium"
-                                    name="counterId"
+                                    placeholder="Revenue"
+                                    value={values.revenue}
                                     onBlur={handleBlur}
-                                    placeholder="CounterId"
                                     onChange={handleChange}
-                                    value={values.counterId}
-                                    label="CounterId"
                                     error={!!touched.name && !!errors.name}
                                     helperText={touched.name && errors.name}
-                                >
-                                    <MenuItem value="1">1</MenuItem>
-                                    <MenuItem value="2">2</MenuItem>
-                                </TextField>
-                            </Grid>
-                            <Grid item sm={6} xs={12}>
-                                <TextField
-                                    select
-                                    fullWidth
-                                    color="info"
-                                    size="medium"
-                                    name="roleId"
-                                    onBlur={handleBlur}
-                                    placeholder="RoleId"
-                                    onChange={handleChange}
-                                    value={values.roleId}
-                                    label="RoleId"
-                                    error={!!touched.name && !!errors.name}
-                                    helperText={touched.name && errors.name}
-                                >
-                                    <MenuItem value="3">Admin</MenuItem>
-                                    <MenuItem value="2">Manager</MenuItem>
-                                    <MenuItem value="1">Staff</MenuItem>
-                                </TextField>
+                                />
                             </Grid>
                             <Grid item sm={12} xs={12}>
                                 <Button variant="contained" color="info" type="submit">

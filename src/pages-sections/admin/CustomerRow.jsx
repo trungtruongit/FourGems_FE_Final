@@ -6,16 +6,32 @@ import {
     StyledTableCell,
     StyledTableRow,
 } from "./StyledComponents";
-import {currency} from "lib";
 import axios from "axios";
 import {useRouter} from "next/router";
-import {useState} from "react"; // ========================================================================
+import {useEffect, useState} from "react";
+import {Button, MenuItem, TextField} from "@mui/material"; // ========================================================================
 
 // ========================================================================
 const CustomerRow = ({customer}) => {
-    const {id, fullName, phoneNumber, address, roleName, revenue} = customer;
+    const {id, username, phoneNumber, address, roleName, revenue, email, counterId } = customer;
     const router = useRouter();
     const [update, setUpdate] = useState();
+    const [edit, setEdit] = useState(false);
+    const [userName, setUserName] = useState("");
+    const [phoneNumberNew, setPhoneNumberNew] = useState("");
+    const [addressNew, setAddressNew] = useState("");
+    const [roleNameNew, setRoleNameNew] = useState("");
+    const [emailNew, setEmailNew] = useState("");
+    const [passwordNew, setPasswordNew] = useState("");
+    const Object = {
+        userName : userName,
+        phoneNumberNew: phoneNumberNew,
+        addressNew: addressNew,
+        roleNameNew: roleNameNew,
+        emailNew: emailNew,
+        passwordNew: passwordNew,
+    }
+    console.log(Object)
     let token = '';
     if (typeof localStorage !== 'undefined') {
         token = localStorage.getItem('token');
@@ -27,19 +43,39 @@ const CustomerRow = ({customer}) => {
         console.log('Web Storage is not supported in this environment.');
     }
     const handleUpdateUser = async () => {
+        console.log(id)
+        // {
+        //     "id": 10,
+        //     "fullName": "Trung San1",
+        //     "username": "trung tayto1",
+        //     "address": "testaddress3541",
+        //     "phoneNumber": "0987898249",
+        //     "roleName": "manager",
+        //     "revenue": 11062.0,
+        //     "email": "trung123@gmail.com",
+        //     "roleId": 2
+        // }
+        console.log(id, username, userName, addressNew, emailNew, passwordNew, phoneNumberNew, roleNameNew, counterId)
         try {
-            const respone = await axios.post(`https://four-gems-api-c21adc436e90.herokuapp.com/user/get-user-information`, {
+            const resUpdateAccount = await axios.put(`https://four-gems-api-c21adc436e90.herokuapp.com/user/update?id=${id}`, {
+                "id": id,
+                "name": username,
+                "userName": userName,
+                "address": addressNew,
+                "email": emailNew,
+                "password": passwordNew,
+                "phoneNumber": phoneNumberNew,
+                "roleId": roleNameNew,
+                "counterId": counterId,
+            } ,{
                 headers: {
-                    Authorization: 'Bearer ' + token
-                },
+                    Authorization: 'Bearer ' + token //the token is a variable which holds the token
+                }
             });
-            setUpdate(respone.data.data);
-            console.log(respone.data.data);
-            console.log("OK")
-        } catch (error) {
-            console.error("Failed to update account:", error);
-        }finally {
-            await router.push('/admin/users/update')
+            window.location.reload();
+            console.log(resUpdateAccount.data.data)
+        } catch (e) {
+            console.log(e)
         }
     }
     const handleDeleteUser = async () => {
@@ -58,7 +94,35 @@ const CustomerRow = ({customer}) => {
         <StyledTableRow tabIndex={-1} role="checkbox">
             <StyledTableCell align="left">
                 <FlexBox alignItems="center" gap={1.5}>
-                    <Paragraph>{fullName}</Paragraph>
+                    {edit? <TextField
+                        fullWidth
+                        name="userName"
+                        label="Full Name"
+                        color="info"
+                        size="medium"
+                        placeholder="Full Name"
+                        value={userName}
+                        onChange={e => setUserName(e.target.value)}
+                    />:<Paragraph>{username}</Paragraph>}
+                </FlexBox>
+            </StyledTableCell>
+            <StyledTableCell
+                align="left"
+                sx={{
+                    fontWeight: 400,
+                }}
+            >
+                <FlexBox alignItems="center" gap={1.5}>
+                    {edit? <TextField
+                        fullWidth
+                        name="phoneNumber"
+                        label="Phone Number"
+                        color="info"
+                        size="medium"
+                        placeholder="Phone Number"
+                        value={phoneNumberNew}
+                        onChange={e => setPhoneNumberNew(e.target.value)}
+                    />:<Paragraph>{phoneNumber}</Paragraph>}
                 </FlexBox>
             </StyledTableCell>
 
@@ -68,7 +132,18 @@ const CustomerRow = ({customer}) => {
                     fontWeight: 400,
                 }}
             >
-                {phoneNumber}
+                <FlexBox alignItems="center" gap={1.5}>
+                    {edit? <TextField
+                        fullWidth
+                        name="addressNew"
+                        label="Address"
+                        color="info"
+                        size="medium"
+                        placeholder="Address"
+                        value={addressNew}
+                        onChange={e => setAddressNew(e.target.value)}
+                    />:<Paragraph>{address}</Paragraph>}
+                </FlexBox>
             </StyledTableCell>
 
             <StyledTableCell
@@ -77,34 +152,81 @@ const CustomerRow = ({customer}) => {
                     fontWeight: 400,
                 }}
             >
-                {address}
+                <FlexBox alignItems="center" gap={1.5}>
+                    {edit? <TextField
+                        fullWidth
+                        name="passwordNew"
+                        label="Password"
+                        color="info"
+                        size="medium"
+                        placeholder="Password"
+                        value={passwordNew}
+                        onChange={e => setPasswordNew(e.target.value)}
+                    />:<Paragraph>********</Paragraph>}
+                </FlexBox>
             </StyledTableCell>
-
+            <StyledTableCell align="left">
+                <FlexBox alignItems="center" gap={1.5}>
+                    {edit? <TextField
+                        fullWidth
+                        name="email"
+                        label="Email"
+                        color="info"
+                        size="medium"
+                        placeholder="Email"
+                        value={emailNew}
+                        onChange={e => setEmailNew(e.target.value)}
+                    />:<Paragraph>{email}</Paragraph>}
+                </FlexBox>
+            </StyledTableCell>
             <StyledTableCell
                 align="left"
                 sx={{
                     fontWeight: 400,
                 }}
             >
-                {currency(revenue)}
-            </StyledTableCell>
-
-            <StyledTableCell
-                align="left"
-                sx={{
-                    fontWeight: 400,
-                }}
-            >
-                {roleName}
+                <FlexBox alignItems="center" gap={1.5}>
+                    {edit? <TextField
+                            select
+                            fullWidth
+                            color="info"
+                            size="medium"
+                            name="roleName"
+                            placeholder="Role Name"
+                            onChange={e => setRoleNameNew(e.target.value)}
+                            value={roleNameNew}
+                            label="Role Name"
+                        >
+                            <MenuItem value="3">Admin</MenuItem>
+                            <MenuItem value="2">Manager</MenuItem>
+                            <MenuItem value="1">Staff</MenuItem>
+                        </TextField> :<Paragraph>{roleName}</Paragraph>}
+                </FlexBox>
             </StyledTableCell>
 
             <StyledTableCell align="center">
-                <StyledIconButton onClick={() => handleUpdateUser()}>
-                    <Edit/>
-                </StyledIconButton>
-                <StyledIconButton onClick={() => handleDeleteUser()}>
-                    <Delete/>
-                </StyledIconButton>
+                {edit?<div>
+                    <Button sx={{
+                        margin: "1px",
+                        borderRadius: "10px",
+                    }} variant="contained" color="info" onClick={() => handleUpdateUser()}>
+                        Confirm
+                    </Button>
+                    <Button sx={{
+                        margin: "1px",
+                        width: "89.28px",
+                        borderRadius: "10px",
+                    }} variant="contained" color="error" onClick={() => setEdit(!edit)}>
+                        Cancel
+                    </Button>
+                </div>:<div>
+                    <StyledIconButton onClick={() => setEdit(!edit)}>
+                        <Edit/>
+                    </StyledIconButton>
+                    <StyledIconButton onClick={() => handleDeleteUser()}>
+                        <Delete/>
+                    </StyledIconButton>
+                </div>}
             </StyledTableCell>
         </StyledTableRow>
     );
