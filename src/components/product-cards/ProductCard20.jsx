@@ -9,6 +9,7 @@ import { FlexRowCenter } from "components/flex-box";
 import { H4, Paragraph, Small } from "components/Typography";
 import { useAppContext } from "contexts/AppContext";
 import ProductViewDialog from "components/products/ProductViewDialog";
+import {convertBase64ToImage} from "../../utils/convertBase64ToImage";
 // custom styled components
 const Card = styled(Box)(({ theme }) => ({
   fontFamily: "Ubuntu",
@@ -62,12 +63,11 @@ const ProductCard20 = ({ product }) => {
 
   const handleAddToCart = (product) => {
     const payload = {
-      id: product.id,
-      slug: product.slug,
+      id: product.productId,
       name: product.productName,
       price: product.price,
-      imgUrl: product.image,
-      qty: (cartItem?.qty || 0) + 1,
+      imgUrl: convertBase64ToImage(product.image),
+      qty: (cartItem?.quantity || 0) + 1,
     };
     dispatch({
       type: "CHANGE_CART_AMOUNT",
@@ -78,25 +78,10 @@ const ProductCard20 = ({ product }) => {
     });
   };
 
-  // Your base64-encoded image string
-  const base64Image = product?.image;
-
-  // // Decode the base64 string
-  // const binaryImage = Buffer.from(base64Image, "base64");
-
-  // // Convert the binary data to a data URL
-  // const imageUrl = `data:image/png;base64,${binaryImage.toString("base64")}`;
-
-  // Convert the binary data to a Base64 encoded string
-  const base64String = base64Image.toString('base64');
-
-  // Construct the URL with the base64 encoded string
-  const imageUrl = `data:image/jpeg;base64,${base64String}`;
-
   return (
     <Card height="100%">
       <CardMedia>
-        <Link href={`/product/${product.slug}`}>
+        <Link href={`/product/${product.productId}`}>
           <a>
             <Image
               width={300}
@@ -105,7 +90,7 @@ const ProductCard20 = ({ product }) => {
               layout="responsive"
               className="product-img"
               // src={decodeURIComponent(product?.image)}
-              src={imageUrl}
+              src={convertBase64ToImage(product.image)}
               alt="Loading"
             />
           </a>
@@ -117,14 +102,6 @@ const ProductCard20 = ({ product }) => {
         >
           <RemoveRedEye color="disabled" fontSize="small" />
         </AddToCartButton>
-
-        {/*<FavouriteButton className="product-actions" onClick={handleFavorite}>*/}
-        {/*  {isFavorite ? (*/}
-        {/*    <Favorite color="primary" fontSize="small" />*/}
-        {/*  ) : (*/}
-        {/*    <FavoriteBorder color="disabled" fontSize="small" />*/}
-        {/*  )}*/}
-        {/*</FavouriteButton>*/}
       </CardMedia>
 
       <ProductViewDialog
@@ -132,11 +109,11 @@ const ProductCard20 = ({ product }) => {
         handleCloseDialog={() => setOpenDialog(false)}
         product={{
           id: product.productId,
-          slug: product.slug,
+          slug: product.productName,
           title: product.productName,
           price: product.price,
           categoryItem: product.categoryItem,
-          imgGroup: [imageUrl, imageUrl],
+          imgGroup: [convertBase64ToImage(product.image), convertBase64ToImage(product.image)],
           description: product.description,
         }}
       />

@@ -149,7 +149,7 @@ const Market = (props) => {
     return (
 
         <ShopLayout1 topbarBgColor={theme.palette.grey[900]}>
-            <SEO title="FourGems"/>
+            <SEO title="FourGemsShop"/>
             <Box bgcolor="#FFFFFF">
                 {/* HERO SLIDER AND GRID */}
                 <Section1 carouselData={props.mainCarouselData}/>
