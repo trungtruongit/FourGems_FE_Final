@@ -30,8 +30,13 @@ const tableHeading = [
         align: "left",
     },
     {
-        id: "revenue",
-        label: "Revenue",
+        id: "password",
+        label: "Password",
+        align: "left",
+    },
+    {
+        id: "email",
+        label: "Email",
         align: "left",
     },
     {
