@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useRouter} from "next/router";
 import {Delete, Edit, RemoveRedEye} from "@mui/icons-material";
-import {Avatar, Box} from "@mui/material";
+import {Avatar, Box, Button} from "@mui/material";
 import {FlexBox} from "components/flex-box";
 import BazaarSwitch from "components/BazaarSwitch";
 import {Paragraph, Small} from "components/Typography";
@@ -12,14 +12,85 @@ import {
     StyledTableCell,
     StyledIconButton,
 } from "../StyledComponents";
-import axios from "axios"; // ========================================================================
+import axios from "axios";
+import CheckIcon from '@mui/icons-material/Check';
+import ClearIcon from '@mui/icons-material/Clear';
+// ========================================================================
 
 // ========================================================================
 const ProductRow = ({product}) => {
-    const {productName, price, image, description, productId, categoryName} = product;
+    const {productName, price, image, description, productId, categoryName, published, gem, weight, laborCost, ratioPrice, quantityInStock, stonePrice, active} = product;
     const router = useRouter();
-    const ProductBox = ({ productName, productId }) => {
-        const productCode = productId ? productId.split("-")[0] : "N/A";
+    const [productPulish, setProductPublish] = useState(published);
+    const [productGem, setProductGem] = useState(gem);
+    const [update, setUpdate] = useState();
+    const [edit, setEdit] = useState(false);
+    const Object = {
+
+    }
+    const base64Image = {image};
+
+    // Convert the binary data to a Base64 encoded string
+    const base64String = base64Image.toString('base64');
+
+    // Construct the URL with the base64 encoded string
+    const imageUrl = `data:image/jpeg;base64,${base64String}`;
+    let token = '';
+    if (typeof localStorage !== 'undefined') {
+        token = localStorage.getItem('token');
+    } else if (typeof sessionStorage !== 'undefined') {
+        // Fallback to sessionStorage if localStorage is not supported
+        token = localStorage.getItem('token');
+    } else {
+        // If neither localStorage nor sessionStorage is supported
+        console.log('Web Storage is not supported in this environment.');
+    }
+    const handleUpdateProduct = async () => {
+        console.log(productId)
+        // {
+        //     "productId": "86",
+        //     "barCode": "123",
+        //     "productName": "test product",
+        //     "weight": "99.3",
+        //     "price": "99.4",
+        //     "laborCost": "99.1",
+        //     "ratioPrice": "99.1",
+        //     "costPrice": "99.3",
+        //     "stonePrice": "99.2",
+        //     "isGem": 0,
+        //     "image": "99",
+        //     "quantityInStock": "99",
+        //     "description": "this is test product",
+        //     "goldId": "50",
+        //     "typeId": "30",
+        //     "collectionId": "1001"
+        // }
+        console.log(productId, )
+        try {
+            const respone = await axios.post(`https://four-gems-api-c21adc436e90.herokuapp.com/product/update-product`, {
+                headers: {
+                    Authorization: 'Bearer ' + token
+                },
+            });
+            setUpdate(respone.data.data);
+            console.log(respone.data.data);
+            console.log("OK")
+        } catch (error) {
+            console.error("Failed to update product:", error);
+        }
+    }
+    const handleDeleteProduct = async (productId) => {
+        console.log(productId)
+        try {
+            await axios.delete(`https://four-gems-api-c21adc436e90.herokuapp.com/product/delete-product?productId=${productId}`,{
+                headers: {
+                    Authorization: 'Bearer ' + token
+                }
+            });
+            window.location.reload();
+        } catch (e) {
+            console.log("Failed to delete product", e);
+        }
     }
     return (
         <StyledTableRow tabIndex={-1} role="checkbox">
@@ -33,7 +104,7 @@ const ProductRow = ({product}) => {
                     />
                     <Box>
                         <Paragraph>{productName}</Paragraph>
-                        <Small color="grey.600">#{ProductBox}</Small>
+                        <Small color="grey.600">#{productId}</Small>
                     </Box>
                 </FlexBox>
             </StyledTableCell>
@@ -45,20 +116,74 @@ const ProductRow = ({product}) => {
 
 
             <StyledTableCell align="left">{currency(price)}</StyledTableCell>
+            <StyledTableCell align="left">{currency(laborCost)}</StyledTableCell>
+            <StyledTableCell align="left">{currency(ratioPrice)}</StyledTableCell>
+            <StyledTableCell align="left">{currency(stonePrice)}</StyledTableCell>
 
+            <StyledTableCell align="left">
+                {weight}
+            </StyledTableCell>
+            <StyledTableCell align="left">
+                {imageUrl}
+            </StyledTableCell>
+            <StyledTableCell align="left">
+                {quantityInStock}
+            </StyledTableCell>
             <StyledTableCell align="left">
                 {description}
             </StyledTableCell>
+            <StyledTableCell align="left">
+                {/*<BazaarSwitch*/}
+                {/*    color="info"*/}
+                {/*    checked={productGem}*/}
+                {/*    onChange={() => setProductGem((state) => !state)}*/}
+                {/*/>*/}
+                {gem?(
+                    <CheckIcon/>
+                ) : (
+                    <ClearIcon/>
+                )
+
+                }
+            </StyledTableCell>
+            <StyledTableCell align="left">
+                {active?(
+                    <CheckIcon/>
+                ) : (
+                    <ClearIcon/>
+                )
+
+                }
+            </StyledTableCell>
+            {/*<StyledTableCell align="left">*/}
+            {/*    <BazaarSwitch*/}
+            {/*        color="info"*/}
+            {/*        checked={productPulish}*/}
+            {/*        onChange={() => setProductPublish((state) => !state)}*/}
+            {/*    />*/}
+            {/*</StyledTableCell>*/}
+
 
             <StyledTableCell align="center">
-                <StyledIconButton onClick={() => router.push(`/admin/products/${productId}`)}>
-                    <Edit/>
-                </StyledIconButton>
-
-
-                <StyledIconButton>
-                    <Delete/>
-                </StyledIconButton>
+                {edit?<div>
+                    <Button sx={{
+                        margin: "1px",
+                        borderRadius: "10px",
+                    }} variant="contained" color="info" onClick={() => handleUpdateProduct()}>
+                        Confirm
+                    </Button>
+                    <Button sx={{
+                        margin: "1px",
+                        width: "89.28px",
+                        borderRadius: "10px",
+                    }} variant="contained" color="error" onClick={() => setEdit(!edit)}>
+                        Cancel
+                    </Button>
+                </div>:<div>
+                    <StyledIconButton onClick={() => setEdit(!edit)}>
+                        <Edit/>
+                    </StyledIconButton>
+                </div>}
             </StyledTableCell>
         </StyledTableRow>
     );

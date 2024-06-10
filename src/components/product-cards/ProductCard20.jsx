@@ -9,6 +9,7 @@ import { FlexRowCenter } from "components/flex-box";
 import { H4, Paragraph, Small } from "components/Typography";
 import { useAppContext } from "contexts/AppContext";
 import ProductViewDialog from "components/products/ProductViewDialog";
+import {convertBase64ToImage} from "../../utils/convertBase64ToImage";
 // custom styled components
 const Card = styled(Box)(({ theme }) => ({
   fontFamily: "Ubuntu",
@@ -62,12 +63,11 @@ const ProductCard20 = ({ product }) => {
 
   const handleAddToCart = (product) => {
     const payload = {
-      id: product.id,
-      slug: product.slug,
+      id: product.productId,
       name: product.productName,
       price: product.price,
-      imgUrl: product.image,
-      qty: (cartItem?.qty || 0) + 1,
+      imgUrl: convertBase64ToImage(product.image),
+      qty: (cartItem?.quantity || 0) + 1,
     };
     dispatch({
       type: "CHANGE_CART_AMOUNT",
@@ -81,19 +81,20 @@ const ProductCard20 = ({ product }) => {
   return (
     <Card height="100%">
       <CardMedia>
-        {/*<Link href={`/product/${product.slug}`}>*/}
-        {/*  <a>*/}
-        {/*    <Image*/}
-        {/*      width={300}*/}
-        {/*      height={300}*/}
-        {/*      alt="category"*/}
-        {/*      objectFit="cover"*/}
-        {/*      layout="responsive"*/}
-        {/*      className="product-img"*/}
-        {/*      src={decodeURIComponent(product?.image)}*/}
-        {/*    />*/}
-        {/*  </a>*/}
-        {/*</Link>*/}
+        <Link href={`/product/${product.productId}`}>
+          <a>
+            <Image
+              width={300}
+              height={300}
+              objectFit="cover"
+              layout="responsive"
+              className="product-img"
+              // src={decodeURIComponent(product?.image)}
+              src={convertBase64ToImage(product.image)}
+              alt="Loading"
+            />
+          </a>
+        </Link>
 
         <AddToCartButton
           className="product-actions"
@@ -101,28 +102,21 @@ const ProductCard20 = ({ product }) => {
         >
           <RemoveRedEye color="disabled" fontSize="small" />
         </AddToCartButton>
-
-        <FavouriteButton className="product-actions" onClick={handleFavorite}>
-          {isFavorite ? (
-            <Favorite color="primary" fontSize="small" />
-          ) : (
-            <FavoriteBorder color="disabled" fontSize="small" />
-          )}
-        </FavouriteButton>
       </CardMedia>
 
-      {/*<ProductViewDialog*/}
-      {/*  openDialog={openDialog}*/}
-      {/*  handleCloseDialog={() => setOpenDialog(false)}*/}
-      {/*  product={{*/}
-      {/*    id: product.productId,*/}
-      {/*    // slug: product.slug,*/}
-      {/*    title: product.title,*/}
-      {/*    price: product.price,*/}
-      {/*    imgGroup: [product.image, product.image],*/}
-      {/*  }}*/}
-      {/*/>*/}
-
+      <ProductViewDialog
+        openDialog={openDialog}
+        handleCloseDialog={() => setOpenDialog(false)}
+        product={{
+          id: product.productId,
+          slug: product.productName,
+          title: product.productName,
+          price: product.price,
+          categoryItem: product.categoryItem,
+          imgGroup: [convertBase64ToImage(product.image), convertBase64ToImage(product.image)],
+          description: product.description,
+        }}
+      />
       <Box p={2} textAlign="center">
         <Paragraph>{product.productName}</Paragraph>
         <H4 fontWeight={700} py={0.5}>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { useRouter } from "next/router";
 import { Box, Container, styled, Tab, Tabs } from "@mui/material";
 import { H2 } from "components/Typography";
@@ -13,7 +13,8 @@ import {
   getFrequentlyBought,
   getRelatedProducts,
 } from "utils/__api__/related-products";
-import api from "utils/__api__/products"; // styled component
+import api from "utils/__api__/products";
+import axios from "axios"; // styled component
 
 const StyledTabs = styled(Tabs)(({ theme }) => ({
   minHeight: 0,
@@ -31,16 +32,43 @@ const StyledTabs = styled(Tabs)(({ theme }) => ({
 
 // ===============================================================
 const ProductDetails = (props) => {
-  const { frequentlyBought, relatedProducts, product } = props;
+  // const { frequentlyBought, relatedProducts, product } = props;
   const router = useRouter();
   const [selectedOption, setSelectedOption] = useState(0);
-
+  const[product, setProduct] = useState({});
+  // const[id, setId] = useState(0);
   const handleOptionClick = (_, value) => setSelectedOption(value); // Show a loading state when the fallback is rendered
-
-  if (router.isFallback) {
-    return <h1>Loading...</h1>;
+  // setId(router.query.id)
+  const id = router.query.id;
+  let token = '';
+  if (typeof localStorage !== 'undefined') {
+    token = localStorage.getItem('token');
+  } else if (typeof sessionStorage !== 'undefined') {
+    token = sessionStorage.getItem('token');
+  } else {
+    console.log('Web Storage is not supported in this environment.');
   }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (token) {
+          const response = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/get-product-by-id?productId=${id}&countId=1`, {
+            headers: {
+              Authorization: `Bearer ` + token
+            }
+          });
+          setProduct(response.data.data);
+          console.log(response.data.data)
 
+        } else {
+          console.warn("Token is missing. Please ensure it's properly set.");
+        }
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <ShopLayout1>
       <Container
@@ -75,7 +103,7 @@ const ProductDetails = (props) => {
           </Box>
         </div>
 
-        {relatedProducts && <RelatedProducts productsData={relatedProducts} />}
+        {/*{relatedProducts && <RelatedProducts productsData={relatedProducts} />}*/}
         <div style={{
           display: "grid",
           textAlign: "center",
@@ -88,24 +116,24 @@ const ProductDetails = (props) => {
   );
 };
 
-export const getStaticPaths = async () => {
-  const paths = await api.getSlugs();
-  return {
-    paths: paths,
-    //indicates that no page needs be created at build time
-    fallback: "blocking", //indicates the type of fallback
-  };
-};
-export const getStaticProps = async ({ params }) => {
-  const relatedProducts = await getRelatedProducts();
-  const frequentlyBought = await getFrequentlyBought();
-  const product = await api.getProduct(params.slug);
-  return {
-    props: {
-      frequentlyBought,
-      relatedProducts,
-      product,
-    },
-  };
-};
+// export const getStaticPaths = async () => {
+//   const paths = await api.getSlugs();
+//   return {
+//     paths: paths,
+//     //indicates that no page needs be created at build time
+//     fallback: "blocking", //indicates the type of fallback
+//   };
+// };
+// export const getStaticProps = async ({ params }) => {
+//   const relatedProducts = await getRelatedProducts();
+//   const frequentlyBought = await getFrequentlyBought();
+//   const product = await api.getProduct(params.slug);
+//   return {
+//     props: {
+//       frequentlyBought,
+//       relatedProducts,
+//       product,
+//     },
+//   };
+// };
 export default ProductDetails;

@@ -45,7 +45,7 @@ const SocialButtons = (props) => {
                 }}
             >
                 <Image src="/assets/images/icons/google-1.svg" alt="facebook" />
-                <Box fontSize="20px" ml={1} >
+                <Box fontSize="16px" ml={1} >
                     Continue with Google
                 </Box>
             </Button>
