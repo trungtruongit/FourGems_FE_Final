@@ -10,6 +10,6 @@ export const convertBase64ToImage = (base64Origin) => {
 
         return imageUrl;
     } else {
-        return "https://picsum.photos/200/300"
+        return "https://picsum.photoAs/200/300"
     }
 }

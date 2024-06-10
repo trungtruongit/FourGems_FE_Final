@@ -41,7 +41,7 @@ const ProductIntro = ({product}) => {
                         <LazyImage
                             alt={productName}
                             width={590}
-                            height={550}
+                            height={700}
                             bgcolor="white"
                             loading="eager"
                             objectFit="contain"
@@ -80,7 +80,7 @@ const ProductIntro = ({product}) => {
                     {/*</FlexBox>*/}
                 </Grid>
 
-                <Grid bgcolor="white" item md={6} xs={12} mt={3} alignItems="center" height={550}>
+                <Grid bgcolor="white" item md={6} xs={12} mt={3} alignItems="center" height={700}>
                     <div style={{
                         display: "grid",
                         textAlign: "center",
@@ -96,22 +96,22 @@ const ProductIntro = ({product}) => {
                         {/*  <Box>Brand:</Box>*/}
                         {/*  <H2 ml={1}>Swarovski</H2>*/}
                         {/*</FlexBox>*/}
-                        <FlexBox alignItems="center" mb={2}>
+                        <FlexBox alignItems="center" mb={2} paddingRight={2}>
                             <p>{description}</p>
                         </FlexBox>
 
-                        <FlexBox alignItems="center" mb={2}>
-                            <Box lineHeight="1">Rated:</Box>
-                            <Box mx={1} lineHeight="1">
-                                <BazaarRating
-                                    color="warn"
-                                    fontSize="1.25rem"
-                                    value={4}
-                                    readOnly
-                                />
-                            </Box>
-                            <H6 lineHeight="1">(50)</H6>
-                        </FlexBox>
+                        {/*<FlexBox alignItems="center" mb={2}>*/}
+                        {/*    <Box lineHeight="1">Rated:</Box>*/}
+                        {/*    <Box mx={1} lineHeight="1">*/}
+                        {/*        <BazaarRating*/}
+                        {/*            color="warn"*/}
+                        {/*            fontSize="1.25rem"*/}
+                        {/*            value={4}*/}
+                        {/*            readOnly*/}
+                        {/*        />*/}
+                        {/*    </Box>*/}
+                        {/*    <H6 lineHeight="1">(50)</H6>*/}
+                        {/*</FlexBox>*/}
 
                         <Box mb={3}>
                             <H2 color="primary.main" mb={0.5} lineHeight="1">
