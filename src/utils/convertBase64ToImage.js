@@ -10,6 +10,9 @@ export const convertBase64ToImage = (base64Origin) => {
 
         return imageUrl;
     } else {
-        return "https://picsum.photoAs/200/300"
+        // Reference the default image correctly
+        const defaultImageUrl = '/assets/images/default/diamond.jpg';
+        return defaultImageUrl;
     }
+    // D:\FPTUniversity\Semester5\SWP391_MinhTTH\FrontEnd_Template\merge\Bazaar\public\assets\images\default
 }
