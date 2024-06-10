@@ -5,4 +5,11 @@ module.exports = {
     theme: "DEFAULT",
     currency: "USD",
   },
+  images: {
+    remotePatterns: [
+      {
+        hostname: 'picsum.photo',
+      },
+    ],
+  },
 };

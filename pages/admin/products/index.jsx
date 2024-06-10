@@ -1,59 +1,40 @@
-import {Button, Box, Card, Stack, Table, TableContainer} from "@mui/material";
+import { Button, Box, Card, Stack, Table, TableContainer } from "@mui/material";
 import TableBody from "@mui/material/TableBody";
 import SearchArea from "components/dashboard/SearchArea";
 import TableHeader from "components/data-table/TableHeader";
 import TablePagination from "components/data-table/TablePagination";
 import VendorDashboardLayout from "components/layouts/vendor-dashboard";
-import {H3} from "components/Typography";
+import { H3 } from "components/Typography";
 import useMuiTable from "hooks/useMuiTable";
 import Scrollbar from "components/Scrollbar";
-import {ProductRow} from "pages-sections/admin";
+import { ProductRow } from "pages-sections/admin";
 import api from "utils/__api__/dashboard";
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 import axios from "axios";
-
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 // TABLE HEADING DATA LIST
 const tableHeading = [
-    {
-        id: "name",
-        label: "Name",
-        align: "left",
-    },
-    {
-        id: "category",
-        label: "Category",
-        align: "left",
-    },
-    {
-        id: "price",
-        label: "Price",
-        align: "left",
-    },
-    {
-        id: "description",
-        label: "Description",
-        align: "left",
-    },
-    {
-        id: "publish",
-        label: "Publish",
-        align: "left",
-    },
-    {
-        id: "action",
-        label: "Action",
-        align: "center",
-    },
-]; // =============================================================================
+    { id: "name", label: "Name", align: "left" },
+    { id: "category", label: "Category", align: "left" },
+    { id: "price", label: "Price", align: "left" },
+    { id: "laborCost", label: "Labor Cost", align: "left" },
+    { id: "ratioPrice", label: "Ratio Price", align: "left" },
+    { id: "stonePrice", label: "Stone Price", align: "left" },
+    { id: "weight", label: "Weight", align: "left" },
+    { id: "image", label: "Image", align: "left" },
+    { id: "quantity", label: "Quantity", align: "left" },
+    { id: "description", label: "Description", align: "left" },
+    { id: "isGem", label: "Is Gem", align: "left" },
+    { id: "publish", label: "Publish", align: "left" },
+    { id: "action", label: "Edit", align: "center" },
+];
 
 ProductList.getLayout = function getLayout(page) {
     return <VendorDashboardLayout>{page}</VendorDashboardLayout>;
-}; // =============================================================================
+};
 
-// =============================================================================
-export default function ProductList({initialProducts}) {
+export default function ProductList({ initialProducts }) {
     const [products, setProducts] = useState(initialProducts);
     const [loading, setLoading] = useState(false);
     const router = useRouter();
@@ -111,8 +92,7 @@ export default function ProductList({initialProducts}) {
             <H3>Product List</H3>
 
             <SearchArea
-                handleSearch={() => {
-                }}
+                handleSearch={() => {}}
                 buttonText="Add Product"
                 handleBtnClick={handleNav}
                 searchPlaceholder="Search Product..."
@@ -121,7 +101,8 @@ export default function ProductList({initialProducts}) {
                 <Scrollbar autoHide={false}>
                     <TableContainer
                         sx={{
-                            minWidth: 900,
+                            minWidth: 1500,
+                            width: 1500,
                         }}
                     >
                         <Table>
@@ -137,7 +118,7 @@ export default function ProductList({initialProducts}) {
 
                             <TableBody>
                                 {filteredList.map((product) => (
-                                    <ProductRow product={product} key={product.productId}/>
+                                    <ProductRow product={product} key={product.productId} />
                                 ))}
                             </TableBody>
                         </Table>
@@ -171,4 +152,4 @@ export const getStaticProps = async () => {
             },
         };
     }
-};
+}
