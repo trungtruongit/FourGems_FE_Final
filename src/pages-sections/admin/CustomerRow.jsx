@@ -38,8 +38,6 @@ const CustomerRow = ({customer}) => {
             console.log("OK")
         } catch (error) {
             console.error("Failed to update account:", error);
-        }finally {
-            await router.push('/admin/users/update')
         }
     }
     const handleDeleteUser = async () => {

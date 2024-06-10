@@ -24,29 +24,29 @@ import axios from "axios";
 const Market = (props) => {
     const theme = useTheme();
     const router = useRouter();
-    const [showBracProduct, setShowBracProduct] = useState([]);
+    const [showBraceletProduct, setShowBraceletProduct] = useState([]);
     const [showRingProduct, setShowRingProduct] = useState([]);
     const [showEarringProduct, setShowEarringProduct] = useState([]);
     const [showNecklaceProduct, setShowNecklaceProduct] = useState([]);
     const [showCharmProduct, setShowCharmProduct] = useState([]);
 
     useEffect(() => {
-        const fetchProductBrac = async () => {
+        const fetchProductBracelet = async () => {
             const token = localStorage.getItem("token");
             try {
 
-                const resBracProduct = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=price&sortType= &categoryName=bracelet&searchKeyword= `, {
+                const resBraceletProduct = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=productId&sortType=ASC&categoryName=bracelet&searchKeyword= `, {
                     headers: {
                         Authorization: 'Bearer ' + token //the token is a variable which holds the token
                     }
                 });
-                setShowBracProduct(resBracProduct.data.data)
-                console.log(resBracProduct.data.data)
+                setShowBraceletProduct(resBraceletProduct.data.data)
+                console.log(resBraceletProduct.data.data)
             } catch (e) {
                 console.log(e)
             }
         }
-        fetchProductBrac();
+        fetchProductBracelet();
     }, []);
 
 
@@ -177,8 +177,8 @@ const Market = (props) => {
                 <Section8 products={showCharmProduct} />
 
 
-                {/* Brac */}
-                <Section9 products={showBracProduct}/>
+                {/* Bracelet */}
+                <Section9 products={showBraceletProduct}/>
 
                 <div style={{
                     display: "grid",

@@ -17,8 +17,10 @@ import {token} from "stylis"; // ===============================================
 
 // ========================================================================
 const ProductRow = ({product}) => {
-    const {productName, price, image, description, productId, categoryName} = product;
+    const {productName, price, image, description, productId, categoryName, published} = product;
     const router = useRouter();
+    const [productPulish, setProductPublish] = useState(published);
+    const [update, setUpdate] = useState();
     let token = '';
     if (typeof localStorage !== 'undefined') {
         token = localStorage.getItem('token');
@@ -29,6 +31,20 @@ const ProductRow = ({product}) => {
         // If neither localStorage nor sessionStorage is supported
         console.log('Web Storage is not supported in this environment.');
     }
+    const handleUpdateProduct = async () => {
+        try {
+            const respone = await axios.post(`https://four-gems-api-c21adc436e90.herokuapp.com/product/update-product`, {
+                headers: {
+                    Authorization: 'Bearer ' + token
+                },
+            });
+            setUpdate(respone.data.data);
+            console.log(respone.data.data);
+            console.log("OK")
+        } catch (error) {
+            console.error("Failed to update product:", error);
+        }
+    }
     const handleDeleteProduct = async (productId) => {
         console.log(productId)
         try {
@@ -37,7 +53,6 @@ const ProductRow = ({product}) => {
                     Authorization: 'Bearer ' + token
                 }
             });
-            await axios.put(`https://four-gems-api-c21adc436e90.herokuapp.com/product/delete-product?productId=${productId}`,{}, {});
             window.location.reload();
         } catch (e) {
             console.log("Failed to delete product", e);
@@ -72,10 +87,21 @@ const ProductRow = ({product}) => {
                 {description}
             </StyledTableCell>
 
+            <StyledTableCell align="left">
+
+                <BazaarSwitch
+                    color="info"
+                    checked={productPulish}
+                    onChange={() => setProductPublish((state) => !state)}
+                />
+            </StyledTableCell>
+
             <StyledTableCell align="center">
-                <StyledIconButton onClick={() => router.push(`/admin/products/${productId}`)}>
+                <StyledIconButton onClick={() => handleUpdateProduct()}>
                     <Edit/>
                 </StyledIconButton>
+
+
 
 
                 <StyledIconButton onClick={() => handleDeleteProduct()}>
