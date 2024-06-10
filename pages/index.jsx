@@ -24,22 +24,24 @@ import axios from "axios";
 const Market = (props) => {
     const theme = useTheme();
     const router = useRouter();
-    const [showBracProduct, setShowBracProduct] = useState([]);
+    const [showBraceletProduct, setShowBraceletProduct] = useState([]);
     const [showRingProduct, setShowRingProduct] = useState([]);
     const [showEarringProduct, setShowEarringProduct] = useState([]);
     const [showNecklaceProduct, setShowNecklaceProduct] = useState([]);
+    const [showCharmProduct, setShowCharmProduct] = useState([]);
 
     useEffect(() => {
         const fetchProductBracelet = async () => {
             const token = localStorage.getItem("token");
             try {
 
-                const resBracProduct = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=price&sortType= &categoryName=bracelet&searchKeyword= `, {
+                const resBraceletProduct = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=productId&sortType=ASC&categoryName=bracelet&searchKeyword= `, {
                     headers: {
                         Authorization: 'Bearer ' + token //the token is a variable which holds the token
                     }
                 });
-                setShowBracProduct(resBracProduct.data.data)
+                setShowBraceletProduct(resBraceletProduct.data.data)
+                console.log(resBraceletProduct.data.data)
             } catch (e) {
                 console.log(e)
             }
@@ -89,7 +91,7 @@ const Market = (props) => {
             const token = localStorage.getItem("token");
             try {
 
-                const resNecklacesProduct = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=price&sortType= &categoryName=earring&searchKeyword= `, {
+                const resNecklacesProduct = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=price&sortType= &categoryName=necklace&searchKeyword= `, {
                     headers: {
                         Authorization: 'Bearer ' + token //the token is a variable which holds the token
                     }
@@ -112,7 +114,7 @@ const Market = (props) => {
                         Authorization: 'Bearer ' + token //the token is a variable which holds the token
                     }
                 });
-                setShowNecklaceProduct(resCharmProduct.data.data)
+                setShowCharmProduct(resCharmProduct.data.data)
             } catch (e) {
                 console.log(e)
             }
@@ -172,11 +174,11 @@ const Market = (props) => {
 
 
                 {/*  Charm */}
-                <Section8 products={showRingProduct} />
+                <Section8 products={showCharmProduct} />
 
 
-                {/* Brac */}
-                <Section9 products={showBracProduct}/>
+                {/* Bracelet */}
+                <Section9 products={showBraceletProduct}/>
 
                 <div style={{
                     display: "grid",

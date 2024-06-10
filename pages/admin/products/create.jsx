@@ -47,23 +47,7 @@ export default function CreateProduct() {
         typeId: yup.number().required("required"),
     });
 
-    // {
-    //   "barCode":"123",
-    //     "productName":"test product",
-    //     "weight":"12.3",
-    //     "price":"13.4",
-    //     "laborCost":"19.1",
-    //     "ratioPrice":"20.1",
-    //     "costPrice":"21.3",
-    //     "stonePrice":"51.2",
-    //     "isGem":true,
-    //     "image":"123",
-    //     "quantityInStock":"12",
-    //     "description":"this is test product",
-    //     "goldId":"50",
-    //     "typeId":"30",
-    //     "collectionId" : "1"
-    // }
+
 
     const handleFormSubmit = async (values) => {
 
@@ -78,6 +62,23 @@ export default function CreateProduct() {
 // Encode the buffer back to base64
         const outputString = buffer.toString("base64");
 
+        // {
+        //   "barCode":"123",
+        //     "productName":"test product",
+        //     "weight":"12.3",
+        //     "price":"13.4",
+        //     "laborCost":"19.1",
+        //     "ratioPrice":"20.1",
+        //     "costPrice":"21.3",
+        //     "stonePrice":"51.2",
+        //     "isGem":true,
+        //     "image":"123",
+        //     "quantityInStock":"12",
+        //     "description":"this is test product",
+        //     "goldId":"50",
+        //     "typeId":"30",
+        //     "collectionId" : "1"
+        // }
         const productNew = {
             barCode: values.barcode,
             productName: values.name,
