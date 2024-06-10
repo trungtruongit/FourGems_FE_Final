@@ -6,11 +6,11 @@ import React from "react"; // ==================================================
 
 // ===============================================================
 const SearchArea = (props) => {
-    const { searchPlaceholder, buttonText, handleBtnClick } = props;
+    const { searchPlaceholder, buttonText, handleBtnClick, dataSearch, setDataSearch } = props;
     const downSM = useMediaQuery((theme) => theme.breakpoints.down("sm"));
     return (
         <FlexBox mb={2} gap={2} justifyContent="space-between" flexWrap="wrap">
-            <SearchInput placeholder={searchPlaceholder} />
+            <SearchInput placeholder={searchPlaceholder} value={dataSearch} onChange={(e) => setDataSearch(e.target.value)} />
 
             <Button
                 color="info"

@@ -31,7 +31,7 @@ const CustomerRow = ({customer}) => {
         emailNew: emailNew,
         passwordNew: passwordNew,
     }
-    console.log(Object)
+    // console.log(Object)
     let token = '';
     if (typeof localStorage !== 'undefined') {
         token = localStorage.getItem('token');

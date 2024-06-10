@@ -59,6 +59,8 @@ export default function CustomerList({initialCustomers}) {
     const [customers, setCustomers] = useState(initialCustomers);
     const [loading, setLoading] = useState(false);
     const router = useRouter(); // useRouter should be called inside the component
+    const [dataSearch, setDataSearch] = useState();
+    const [accountSearch, setAccountSearch] = useState();
     let token = '';
     if (typeof localStorage !== 'undefined') {
         token = localStorage.getItem('token');
@@ -81,7 +83,7 @@ export default function CustomerList({initialCustomers}) {
         handleChangePage,
         handleRequestSort,
     } = useMuiTable({
-        listData: customers,
+        listData: accountSearch,
     });
     useEffect(() => {
         const fetchData = async () => {
@@ -100,10 +102,25 @@ export default function CustomerList({initialCustomers}) {
                 setLoading(false);
             }
         };
-
         fetchData();
     }, []);
-
+    useEffect(() => {
+        const fetchDataSearch = async () => {
+            console.log(dataSearch)
+            try {
+                const responeSearch = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/user/get-by-name?name=${dataSearch}`, {
+                    headers: {
+                        Authorization: 'Bearer ' + token //the token is a variable which holds the token
+                    }
+                });
+                setAccountSearch(responeSearch.data.data);
+                console.log(responeSearch.data.data);
+            } catch (error) {
+                console.error("Failed to search customers:", error);
+            }
+        };
+        fetchDataSearch();
+    }, [dataSearch]);
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -112,8 +129,8 @@ export default function CustomerList({initialCustomers}) {
             <H3 mb={2}>Users</H3>
 
             <SearchArea
-                handleSearch={() => {
-                }}
+                dataSearch={dataSearch}
+                setDataSearch={setDataSearch}
                 buttonText="Add User"
                 handleBtnClick={handleNav} // use handleNav function
                 searchPlaceholder="Search User..."

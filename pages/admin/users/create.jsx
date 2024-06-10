@@ -3,13 +3,15 @@ import * as yup from "yup";
 import { H3 } from "components/Typography";
 import VendorDashboardLayout from "components/layouts/vendor-dashboard";
 import AccountForm from "../../../src/pages-sections/admin/accounts/AccountForm";
-import axios from "axios"; // =============================================================================
+import axios from "axios";
+import {useRouter} from "next/router"; // =============================================================================
 
 CreateAccount.getLayout = function getLayout(page) {
   return <VendorDashboardLayout>{page}</VendorDashboardLayout>;
 }; // =============================================================================
 
 export default function CreateAccount() {
+  const router = useRouter();
   const INITIAL_VALUES = {
     userName: "",
     name: "",
@@ -53,6 +55,7 @@ export default function CreateAccount() {
     } catch (e) {
       console.log(e)
     }
+    await router.push("/admin/users-account");
   };
   return (
       <Box py={4}>

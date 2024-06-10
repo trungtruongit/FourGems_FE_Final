@@ -39,18 +39,15 @@ const Cart = () => {
           >
             <FlexBetween mb={2}>
               <Span color="grey.600">Total:</Span>
-
               <Span fontSize={18} fontWeight={600} lineHeight="1">
                 {currency(getTotalPrice())}
               </Span>
             </FlexBetween>
-
             <Divider
               sx={{
                 mb: 2,
               }}
             />
-
             <FlexBox alignItems="center" columnGap={1} mb={2}>
               <Span fontWeight="600">Additional Comments</Span>
 
@@ -108,64 +105,64 @@ const Cart = () => {
               }}
             />
 
-            <Span fontWeight={600} mb={2} display="block">
-              Shipping Estimates
-            </Span>
+            {/*<Span fontWeight={600} mb={2} display="block">*/}
+            {/*  Shipping Estimates*/}
+            {/*</Span>*/}
 
-            <Autocomplete
-              fullWidth
-              sx={{
-                mb: 2,
-              }}
-              options={countryList} // getOptionLabel={(option) => option.label}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  size="small"
-                  label="Country"
-                  variant="outlined"
-                  placeholder="Select Country"
-                />
-              )}
-            />
+            {/*<Autocomplete*/}
+            {/*  fullWidth*/}
+            {/*  sx={{*/}
+            {/*    mb: 2,*/}
+            {/*  }}*/}
+            {/*  options={countryList} // getOptionLabel={(option) => option.label}*/}
+            {/*  renderInput={(params) => (*/}
+            {/*    <TextField*/}
+            {/*      {...params}*/}
+            {/*      size="small"*/}
+            {/*      label="Country"*/}
+            {/*      variant="outlined"*/}
+            {/*      placeholder="Select Country"*/}
+            {/*    />*/}
+            {/*  )}*/}
+            {/*/>*/}
 
-            <TextField
-              select
-              fullWidth
-              size="small"
-              label="State"
-              variant="outlined"
-              placeholder="Select State"
-              defaultValue="new-york"
-            >
-              {stateList.map((item) => (
-                <MenuItem value={item.value} key={item.label}>
-                  {item.label}
-                </MenuItem>
-              ))}
-            </TextField>
+            {/*<TextField*/}
+            {/*  select*/}
+            {/*  fullWidth*/}
+            {/*  size="small"*/}
+            {/*  label="State"*/}
+            {/*  variant="outlined"*/}
+            {/*  placeholder="Select State"*/}
+            {/*  defaultValue="new-york"*/}
+            {/*>*/}
+            {/*  {stateList.map((item) => (*/}
+            {/*    <MenuItem value={item.value} key={item.label}>*/}
+            {/*      {item.label}*/}
+            {/*    </MenuItem>*/}
+            {/*  ))}*/}
+            {/*</TextField>*/}
 
-            <TextField
-              fullWidth
-              size="small"
-              label="Zip Code"
-              placeholder="3100"
-              variant="outlined"
-              sx={{
-                mt: 2,
-              }}
-            />
+            {/*<TextField*/}
+            {/*  fullWidth*/}
+            {/*  size="small"*/}
+            {/*  label="Zip Code"*/}
+            {/*  placeholder="3100"*/}
+            {/*  variant="outlined"*/}
+            {/*  sx={{*/}
+            {/*    mt: 2,*/}
+            {/*  }}*/}
+            {/*/>*/}
 
-            <Button
-              variant="outlined"
-              color="primary"
-              fullWidth
-              sx={{
-                my: 2,
-              }}
-            >
-              Calculate Shipping
-            </Button>
+            {/*<Button*/}
+            {/*  variant="outlined"*/}
+            {/*  color="primary"*/}
+            {/*  fullWidth*/}
+            {/*  sx={{*/}
+            {/*    my: 2,*/}
+            {/*  }}*/}
+            {/*>*/}
+            {/*  Calculate Shipping*/}
+            {/*</Button>*/}
 
             <Link href="/checkout" passHref legacyBehavior>
               <Button variant="contained" color="primary" fullWidth>
