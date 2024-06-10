@@ -177,20 +177,20 @@ const MiniCart = ({ toggleSidenav }) => {
 
       {!!cartList.length && (
         <Box p={2.5}>
-          <Link href="/checkout-alternative" passHref>
-            <Button
-              fullWidth
-              color="primary"
-              variant="contained"
-              sx={{
-                mb: "0.75rem",
-                height: "40px",
-              }}
-              onClick={toggleSidenav}
-            >
-              Checkout Now (${getTotalPrice().toFixed(2)})
-            </Button>
-          </Link>
+          {/*<Link href="/checkout-alternative" passHref>*/}
+          {/*  <Button*/}
+          {/*    fullWidth*/}
+          {/*    color="primary"*/}
+          {/*    variant="contained"*/}
+          {/*    sx={{*/}
+          {/*      mb: "0.75rem",*/}
+          {/*      height: "40px",*/}
+          {/*    }}*/}
+          {/*    onClick={toggleSidenav}*/}
+          {/*  >*/}
+          {/*    Checkout Now (${getTotalPrice().toFixed(2)})*/}
+          {/*  </Button>*/}
+          {/*</Link>*/}
 
           <Link href="/cart" passHref>
             <Button
@@ -202,7 +202,7 @@ const MiniCart = ({ toggleSidenav }) => {
               }}
               onClick={toggleSidenav}
             >
-              View Cart
+              View Cart (${getTotalPrice().toFixed(2)})
             </Button>
           </Link>
         </Box>
