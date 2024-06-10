@@ -72,8 +72,8 @@ const GoldPriceTable = (props) => {
             try {
                 const response = await axios.get('https://www.goldapi.io/api/XAU/USD', {
                     headers: {
-                        // 'x-access-token': "goldapi-ea626slww7qukh-io" // Thay thế bằng API key thực tế của bạn
-                        'x-access-token': goldApiToken // Thay thế bằng API key thực tế của bạn
+                        'x-access-token': "goldapi-1gnd90slx7lb2u5-io"
+                        // 'x-access-token': goldApiToken // Thay thế bằng API key thực tế của bạn
                     },
                 });
                 // console.log(response.data); // Ghi log dữ liệu phản hồi vào console

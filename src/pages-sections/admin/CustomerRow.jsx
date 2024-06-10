@@ -187,20 +187,20 @@ const CustomerRow = ({customer}) => {
             >
                 <FlexBox alignItems="center" gap={1.5}>
                     {edit? <TextField
-                            select
-                            fullWidth
-                            color="info"
-                            size="medium"
-                            name="roleName"
-                            placeholder="Role Name"
-                            onChange={e => setRoleNameNew(e.target.value)}
-                            value={roleNameNew}
-                            label="Role Name"
-                        >
-                            <MenuItem value="3">Admin</MenuItem>
-                            <MenuItem value="2">Manager</MenuItem>
-                            <MenuItem value="1">Staff</MenuItem>
-                        </TextField> :<Paragraph>{roleName}</Paragraph>}
+                        select
+                        fullWidth
+                        color="info"
+                        size="medium"
+                        name="roleName"
+                        placeholder="Role Name"
+                        onChange={e => setRoleNameNew(e.target.value)}
+                        value={roleNameNew}
+                        label="Role Name"
+                    >
+                        <MenuItem value="3">Admin</MenuItem>
+                        <MenuItem value="2">Manager</MenuItem>
+                        <MenuItem value="1">Staff</MenuItem>
+                    </TextField> :<Paragraph>{roleName}</Paragraph>}
                 </FlexBox>
             </StyledTableCell>
 

@@ -37,6 +37,11 @@ const tableHeading = [
         align: "left",
     },
     {
+        id: "publish",
+        label: "Publish",
+        align: "left",
+    },
+    {
         id: "action",
         label: "Action",
         align: "center",
@@ -83,7 +88,7 @@ export default function ProductList({initialProducts}) {
             setLoading(true);
             try {
                 if (token) {
-                    const response = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=1000&page=0&sortKeyword=productId&sortType=DESC&categoryName= &searchKeyword= `, {
+                    const response = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=productId&sortType=DESC&categoryName= &searchKeyword= `, {
                         headers: {
                             Authorization: `Bearer ` + token
                         }
@@ -106,7 +111,8 @@ export default function ProductList({initialProducts}) {
             <H3>Product List</H3>
 
             <SearchArea
-                handleSearch={() => {}}
+                handleSearch={() => {
+                }}
                 buttonText="Add Product"
                 handleBtnClick={handleNav}
                 searchPlaceholder="Search Product..."
