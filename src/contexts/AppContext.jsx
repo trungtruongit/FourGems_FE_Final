@@ -1,9 +1,7 @@
 import { createContext, useContext, useMemo, useReducer } from "react"; // =================================================================================
 
 // =================================================================================
-const INITIAL_CART = [
-
-];
+const INITIAL_CART = [];
 const INITIAL_STATE = {
   cart: INITIAL_CART,
 };

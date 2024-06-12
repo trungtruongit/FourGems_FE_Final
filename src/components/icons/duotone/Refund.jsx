@@ -1,5 +1,5 @@
-import {Box, SvgIcon} from "@mui/material";
-import ConstructionIcon from '@mui/icons-material/Construction';
+import { Box, SvgIcon } from "@mui/material";
+import ConstructionIcon from "@mui/icons-material/Construction";
 import IconButton from "@mui/material/IconButton";
 const Refund = (props) => {
   return (
@@ -19,14 +19,14 @@ const Refund = (props) => {
     //     fill="currentColor"
     //   />
     // </SvgIcon>
-      <Box
-          component={IconButton}
-          sx={{
-            height: "45px"
-          }}
-      >
-        <ConstructionIcon />
-      </Box>
+    <Box
+      component={IconButton}
+      sx={{
+        height: "45px",
+      }}
+    >
+      <ConstructionIcon />
+    </Box>
   );
 };
 

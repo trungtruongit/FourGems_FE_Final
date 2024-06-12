@@ -20,27 +20,32 @@ const Section4 = ({ products }) => {
     else setVisibleSlides(4);
   }, [width]);
   return (
-      <Container
-          sx={{
-            py: 8,
-            mt: -11,
-          }}
-      >
-        <FlexBetween mb={3}>
-          <H2 fontSize={30}>Earrings</H2>
-          <NavLink3 fontSize={30} text="More Products" href="#" hoverColor="dark.main" />
-        </FlexBetween>
+    <Container
+      sx={{
+        py: 8,
+        mt: -11,
+      }}
+    >
+      <FlexBetween mb={3}>
+        <H2 fontSize={30}>Earrings</H2>
+        <NavLink3
+          fontSize={30}
+          text="More Products"
+          href="#"
+          hoverColor="dark.main"
+        />
+      </FlexBetween>
 
-        <Carousel
-            totalSlides={products.length}
-            visibleSlides={visibleSlides}
-            sx={carouselStyled}
-        >
-          {products.map((product) => (
-              <ProductCard20 product={product} key={product.id} />
-          ))}
-        </Carousel>
-      </Container>
+      <Carousel
+        totalSlides={products.length}
+        visibleSlides={visibleSlides}
+        sx={carouselStyled}
+      >
+        {products.map((product) => (
+          <ProductCard20 product={product} key={product.id} />
+        ))}
+      </Carousel>
+    </Container>
   );
 };
 

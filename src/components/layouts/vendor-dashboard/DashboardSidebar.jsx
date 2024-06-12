@@ -165,11 +165,7 @@ const DashboardSidebar = (props) => {
         justifyContent={COMPACT ? "center" : "space-between"}
       >
         <Avatar
-          src={
-            COMPACT
-              ? "/assets/images/logo.svg"
-              : "/assets/images/logo.svg"
-          }
+          src={COMPACT ? "/assets/images/logo.svg" : "/assets/images/logo.svg"}
           sx={{
             borderRadius: 0,
             width: "auto",

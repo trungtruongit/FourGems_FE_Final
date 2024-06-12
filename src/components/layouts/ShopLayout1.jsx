@@ -5,7 +5,7 @@ import Sticky from "components/sticky/Sticky";
 import Topbar from "components/topbar/Topbar";
 import Navbar from "components/navbar/Navbar";
 import { MobileNavigationBar } from "components/mobile-navigation";
-import {marron, themeColors} from "../../theme/themeColors";
+import { marron, themeColors } from "../../theme/themeColors";
 /**
  *  Used in:
  *  1. market-1, matket-2, gadget-shop,
@@ -42,9 +42,7 @@ const ShopLayout1 = ({
         {showNavbar && <Navbar elevation={0} border={1} />}
 
         {/* BODY CONTENT */}
-          <div style={{ backgroundColor: '#F6E5EE' }}>
-              {children}
-          </div>
+        <div style={{ backgroundColor: "#F6E5EE" }}>{children}</div>
       </div>
 
       {/* SMALL DEVICE BOTTOM NAVIGATION */}
