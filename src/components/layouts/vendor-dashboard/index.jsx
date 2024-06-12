@@ -43,7 +43,6 @@ const VendorDashboardLayout = ({ children }) => {
       />
 
       <BodyWrapper compact={sidebarCompact ? 1 : 0}>
-        <DashboardNavbar handleDrawerToggle={handleMobileDrawerToggle} />
         <InnerWrapper>{children}</InnerWrapper>
       </BodyWrapper>
     </Fragment>

@@ -41,7 +41,7 @@ const ProductIntro = ({product}) => {
                         <LazyImage
                             alt={productName}
                             width={590}
-                            height={700}
+                            height={550}
                             bgcolor="white"
                             loading="eager"
                             objectFit="contain"
@@ -80,7 +80,7 @@ const ProductIntro = ({product}) => {
                     {/*</FlexBox>*/}
                 </Grid>
 
-                <Grid bgcolor="white" item md={6} xs={12} mt={3} alignItems="center" height={700}>
+                <Grid bgcolor="white" item md={6} xs={12} mt={3} alignItems="center" height={550}>
                     <div style={{
                         display: "grid",
                         textAlign: "center",
@@ -96,7 +96,7 @@ const ProductIntro = ({product}) => {
                         {/*  <Box>Brand:</Box>*/}
                         {/*  <H2 ml={1}>Swarovski</H2>*/}
                         {/*</FlexBox>*/}
-                        <FlexBox alignItems="center" mb={2} paddingRight={2}>
+                        <FlexBox alignItems="center" mb={2} paddingRight={2} fontSize={18}>
                             <p>{description}</p>
                         </FlexBox>
 
@@ -129,6 +129,7 @@ const ProductIntro = ({product}) => {
                                     mb: 4.5,
                                     px: "1.75rem",
                                     height: 40,
+                                    padding: 2
                                 }}
                             >
                                 Add to Cart
