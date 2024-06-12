@@ -83,8 +83,9 @@ export default function CustomerList({initialCustomers}) {
         handleChangePage,
         handleRequestSort,
     } = useMuiTable({
-        listData: accountSearch,
+        listData: customers,
     });
+    console.log(customers)
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -106,15 +107,15 @@ export default function CustomerList({initialCustomers}) {
     }, []);
     useEffect(() => {
         const fetchDataSearch = async () => {
-            console.log(dataSearch)
             try {
-                const responeSearch = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/user/get-by-name?name=${dataSearch}`, {
+                const responeSearch = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/user/get-by-email?email=${dataSearch}`, {
                     headers: {
                         Authorization: 'Bearer ' + token //the token is a variable which holds the token
                     }
                 });
                 setAccountSearch(responeSearch.data.data);
                 console.log(responeSearch.data.data);
+                setCustomers(responeSearch.data.data)
             } catch (error) {
                 console.error("Failed to search customers:", error);
             }

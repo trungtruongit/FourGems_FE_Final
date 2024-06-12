@@ -131,7 +131,7 @@ const DashboardNavbar = ({handleDrawerToggle}) => {
                             }
                         />
                         <AccountPopover/>
-                        <H3>Hello {name}</H3>
+                        <H3>{name}</H3>
                         <NotificationsPopover/>
                     </FlexBox>
                 </StyledToolBar>

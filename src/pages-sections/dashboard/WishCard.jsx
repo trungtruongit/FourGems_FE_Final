@@ -73,16 +73,11 @@ const WishCard = () => {
                 mb: 6,
             }}>
                 <H2 color="info.main" mb={0.5}>
-                    Good Morning, {name}!
+                    Hello, Welcome back.
                 </H2>
                 <H5 color="grey.600">
                     Here’s what happening with your store today!
                 </H5>
-
-                {/*<H3 mt={3}>15,350.25</H3>*/}
-                {/*<Paragraph color="grey.600">Today’s Visit</Paragraph>*/}
-
-                {/*<H1 mt={1}>{currency(start)}</H1>*/}
                 <H1 mt={1}>
                     {isNaN(start) ? <SpinnerLoading/> : currency(start)}
                 </H1>
@@ -101,8 +96,8 @@ const WishCard = () => {
             >
                 <NextImage
                     src="/assets/images/illustrations/dashboard/welcome.svg"
-                    width={220}
-                    height={180}
+                    width={180}
+                    height={160}
                     alt="Welcome"
 
                 />

@@ -142,7 +142,6 @@ const Section3 = () => {
                 <Grid item xl={3} lg={6} md={6} xs={12}>
                     <Card2
                         title="Weekly Sales"
-                        // percentage="25.25%"
                         amount={currency(total7, 0)}
                     >
                         <ReactApexChart
