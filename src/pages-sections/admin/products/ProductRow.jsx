@@ -15,6 +15,7 @@ import {
 import axios from "axios";
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
+import {convertBase64ToImage} from "../../../utils/convertBase64ToImage";
 // ========================================================================
 
 // ========================================================================
@@ -25,16 +26,10 @@ const ProductRow = ({product}) => {
     const [productGem, setProductGem] = useState(gem);
     const [update, setUpdate] = useState();
     const [edit, setEdit] = useState(false);
+    console.log(image)
     const Object = {
 
     }
-    const base64Image = {image};
-
-    // Convert the binary data to a Base64 encoded string
-    const base64String = base64Image.toString('base64');
-
-    // Construct the URL with the base64 encoded string
-    const imageUrl = `data:image/jpeg;base64,${base64String}`;
     let token = '';
     if (typeof localStorage !== 'undefined') {
         token = localStorage.getItem('token');
@@ -124,7 +119,7 @@ const ProductRow = ({product}) => {
                 {weight}
             </StyledTableCell>
             <StyledTableCell align="left">
-                {imageUrl}
+                {image}
             </StyledTableCell>
             <StyledTableCell align="left">
                 {quantityInStock}
