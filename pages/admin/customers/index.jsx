@@ -61,51 +61,51 @@ export default function SellerList({ sellers }) {
     listData: sellers,
   });
   return (
-      <Box py={4}>
-        <H3 mb={2}>Customers</H3>
+    <Box py={4}>
+      <H3 mb={2}>Customers</H3>
 
-        <SearchOrder
-            handleSearch={() => {}}
-            buttonText="Add New Seller"
-            handleBtnClick={() => {}}
-            searchPlaceholder="Search Customers..."
-        />
+      <SearchOrder
+        handleSearch={() => {}}
+        buttonText="Add New Seller"
+        handleBtnClick={() => {}}
+        searchPlaceholder="Search Customers..."
+      />
 
-        <Card>
-          <Scrollbar>
-            <TableContainer
-                sx={{
-                  minWidth: 1100,
-                }}
-            >
-              <Table>
-                <TableHeader
-                    order={order}
-                    hideSelectBtn
-                    orderBy={orderBy}
-                    heading={tableHeading}
-                    rowCount={sellers.length}
-                    numSelected={selected.length}
-                    onRequestSort={handleRequestSort}
-                />
+      <Card>
+        <Scrollbar>
+          <TableContainer
+            sx={{
+              minWidth: 1100,
+            }}
+          >
+            <Table>
+              <TableHeader
+                order={order}
+                hideSelectBtn
+                orderBy={orderBy}
+                heading={tableHeading}
+                rowCount={sellers.length}
+                numSelected={selected.length}
+                onRequestSort={handleRequestSort}
+              />
 
-                <TableBody>
-                  {filteredList.map((seller, index) => (
-                      <SellerRow seller={seller} key={index} />
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Scrollbar>
+              <TableBody>
+                {filteredList.map((seller, index) => (
+                  <SellerRow seller={seller} key={index} />
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Scrollbar>
 
-          <Stack alignItems="center" my={4}>
-            <TablePagination
-                onChange={handleChangePage}
-                count={Math.ceil(sellers.length / rowsPerPage)}
-            />
-          </Stack>
-        </Card>
-      </Box>
+        <Stack alignItems="center" my={4}>
+          <TablePagination
+            onChange={handleChangePage}
+            count={Math.ceil(sellers.length / rowsPerPage)}
+          />
+        </Stack>
+      </Card>
+    </Box>
   );
 }
 export const getStaticProps = async () => {

@@ -6,9 +6,7 @@ const ProductDescription = () => {
   return (
     <Box>
       <H3 mb={2}>Specification:</H3>
-      <Box
-      fontFamily="Ubuntu"
-      >
+      <Box fontFamily="Ubuntu">
         Brand: Beats <br />
         Model: S450 <br />
         Wireless Bluetooth Headset <br />

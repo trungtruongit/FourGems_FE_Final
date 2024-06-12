@@ -5,9 +5,7 @@ import { H2 } from "components/Typography";
 // ===================================================
 const RelatedProducts = ({ productsData }) => {
   return (
-    <Box mb={7.5}
-         my={3}
-    >
+    <Box mb={7.5} my={3}>
       <H2 mb={2}>You May Also Like</H2>
       <Grid container spacing={2}>
         {productsData.map((item, ind) => (

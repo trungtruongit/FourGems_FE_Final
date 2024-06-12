@@ -3,7 +3,7 @@ import { FlexBetween } from "components/flex-box";
 import { H5 } from "components/Typography";
 import React from "react";
 import DataListTable from "./table"; // table column list
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 const tableHeading = [
   {
     id: "product",
@@ -24,10 +24,10 @@ const tableHeading = [
 
 // ======================================================
 const StockOutProducts = ({ data }) => {
-  const router = useRouter()
+  const router = useRouter();
   const handleNav = () => {
-    router.push('/admin/products')
-  }
+    router.push("/admin/products");
+  };
   return (
     <Card
       sx={{
@@ -37,7 +37,12 @@ const StockOutProducts = ({ data }) => {
       <FlexBetween px={3} py={2.5}>
         <H5>Stock Out Products</H5>
 
-        <Button size="small" color="info" variant="outlined" onClick={handleNav}>
+        <Button
+          size="small"
+          color="info"
+          variant="outlined"
+          onClick={handleNav}
+        >
           All Products
         </Button>
       </FlexBetween>

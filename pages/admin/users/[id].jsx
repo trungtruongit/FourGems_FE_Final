@@ -4,43 +4,47 @@ import { H3 } from "components/Typography";
 import VendorDashboardLayout from "components/layouts/vendor-dashboard";
 import axios from "axios";
 import UpdateAccountForm from "../../../src/pages-sections/admin/accounts/UpdateAccountForm";
-import {useRouter} from "next/router";
-import {useEffect, useState} from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 UpdateAccount.getLayout = function getLayout(page) {
   return <VendorDashboardLayout>{page}</VendorDashboardLayout>;
 }; // =============================================================================
 
 export default function UpdateAccount() {
-  const router = useRouter()
+  const router = useRouter();
   const [update, setUpdate] = useState();
-  console.log(update)
+  console.log(update);
   useEffect(() => {
-    let token = '';
-    if (typeof localStorage !== 'undefined') {
-      token = localStorage.getItem('token');
-    } else if (typeof sessionStorage !== 'undefined') {
+    let token = "";
+    if (typeof localStorage !== "undefined") {
+      token = localStorage.getItem("token");
+    } else if (typeof sessionStorage !== "undefined") {
       // Fallback to sessionStorage if localStorage is not supported
-      token = localStorage.getItem('token');
+      token = localStorage.getItem("token");
     } else {
       // If neither localStorage nor sessionStorage is supported
-      console.log('Web Storage is not supported in this environment.');
+      console.log("Web Storage is not supported in this environment.");
     }
     const handleGetUser = async () => {
       try {
-        const respone = await axios.post(`https://four-gems-api-c21adc436e90.herokuapp.com/user/get-user-information?userId=${router.query.id}`, {
-          "userId": router.query.id,
-        },{
-          headers: {
-            Authorization: 'Bearer ' + token
+        const respone = await axios.post(
+          `https://four-gems-api-c21adc436e90.herokuapp.com/user/get-user-information?userId=${router.query.id}`,
+          {
+            userId: router.query.id,
           },
-        });
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
         setUpdate(respone.data.data);
         console.log(respone.data.data);
       } catch (error) {
         console.error("Failed to update account:", error);
       }
-    }
-    handleGetUser()
+    };
+    handleGetUser();
   }, []);
   const INITIAL_VALUES = {
     username: update?.username,
@@ -59,17 +63,17 @@ export default function UpdateAccount() {
     revenue: yup.string().required("required"),
   });
   const handleFormSubmit = async (values) => {
-    console.log(values)
+    console.log(values);
   };
   return (
-      <Box py={4}>
-        <H3 mb={2}>Update User</H3>
+    <Box py={4}>
+      <H3 mb={2}>Update User</H3>
 
-        <UpdateAccountForm
-            initialValues={INITIAL_VALUES}
-            validationSchema={validationSchema}
-            handleFormSubmit={handleFormSubmit}
-        />
-      </Box>
+      <UpdateAccountForm
+        initialValues={INITIAL_VALUES}
+        validationSchema={validationSchema}
+        handleFormSubmit={handleFormSubmit}
+      />
+    </Box>
   );
 }
