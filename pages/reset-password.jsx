@@ -64,7 +64,6 @@ const ResetPassword = () => {
               </a>
             </Link>
           </FlexRowCenter>
-
         </FlexBox>
       </Card>
     </FlexRowCenter>

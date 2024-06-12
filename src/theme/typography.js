@@ -5,7 +5,6 @@ export const fontFamily = [
   // "Outift",
   //   "Ubuntu_Sans",
   "Ubuntu",
-
 ].join(",");
 export const typography = {
   fontSize,

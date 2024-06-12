@@ -109,7 +109,7 @@ const ProductViewDialog = (props) => {
             <Grid item md={6} xs={12} alignSelf="center">
               <H2>{product.title}</H2>
 
-              <Paragraph py={1} color="grey.500" fontWeight={600} fontSize={13} >
+              <Paragraph py={1} color="grey.500" fontWeight={600} fontSize={13}>
                 {product.categoryItem}
               </Paragraph>
 
@@ -125,9 +125,7 @@ const ProductViewDialog = (props) => {
               {/*  <H6 lineHeight="1">(50)</H6>*/}
               {/*</FlexBox>*/}
 
-              <Paragraph my={2}>
-                {product.description}
-              </Paragraph>
+              <Paragraph my={2}>{product.description}</Paragraph>
 
               <Divider
                 sx={{
