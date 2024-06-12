@@ -9,7 +9,7 @@ import useMuiTable from "hooks/useMuiTable";
 import Scrollbar from "components/Scrollbar";
 import { ProductRow } from "pages-sections/admin";
 import api from "utils/__api__/dashboard";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 // TABLE HEADING DATA LIST
 const tableHeading = [
@@ -52,13 +52,13 @@ ProductList.getLayout = function getLayout(page) {
 // =============================================================================
 export default function ProductList(props) {
   const { products } = props; // RESHAPE THE PRODUCT LIST BASED TABLE HEAD CELL ID
-  const router = useRouter()
+  const router = useRouter();
   const hadleNav = () => {
-    router.push('/admin/products/create')
-  }
+    router.push("/admin/products/create");
+  };
   const hadleNav1 = () => {
-    router.push('/admin/categories')
-  }
+    router.push("/admin/categories");
+  };
   const filteredProducts = products.map((item) => ({
     id: item.id,
     name: item.title,
@@ -80,60 +80,66 @@ export default function ProductList(props) {
     listData: filteredProducts,
   });
   return (
-      <Box py={4}>
-        <H3>Product List</H3>
-          <Button size="small" color="info" variant="outlined" sx={{
-            position: "absolute",
-            bottom: "517px",
-            right: "250px",
-            height: "44px",
-            width: "144.74px",
-            color: "#FFFFFF",
-            backgroundColor: "#4E97FD"
-          }} onClick={hadleNav1}>
-            All Categories</Button>
-        <SearchArea
-            handleSearch={() => {
+    <Box py={4}>
+      <H3>Product List</H3>
+      <Button
+        size="small"
+        color="info"
+        variant="outlined"
+        sx={{
+          position: "absolute",
+          bottom: "517px",
+          right: "250px",
+          height: "44px",
+          width: "144.74px",
+          color: "#FFFFFF",
+          backgroundColor: "#4E97FD",
+        }}
+        onClick={hadleNav1}
+      >
+        All Categories
+      </Button>
+      <SearchArea
+        handleSearch={() => {}}
+        buttonText="Add Product"
+        handleBtnClick={hadleNav}
+        searchPlaceholder="Search Product..."
+      />
+      <Card>
+        <Scrollbar autoHide={false}>
+          <TableContainer
+            sx={{
+              minWidth: 900,
             }}
-            buttonText="Add Product"
-            handleBtnClick={hadleNav}
-            searchPlaceholder="Search Product..."
-        />
-        <Card>
-          <Scrollbar autoHide={false}>
-            <TableContainer
-                sx={{
-                  minWidth: 900,
-                }}
-            >
-              <Table>
-                <TableHeader
-                    order={order}
-                    hideSelectBtn
-                    orderBy={orderBy}
-                    heading={tableHeading}
-                    rowCount={products.length}
-                    numSelected={selected.length}
-                    onRequestSort={handleRequestSort}
-                />
+          >
+            <Table>
+              <TableHeader
+                order={order}
+                hideSelectBtn
+                orderBy={orderBy}
+                heading={tableHeading}
+                rowCount={products.length}
+                numSelected={selected.length}
+                onRequestSort={handleRequestSort}
+              />
 
-                <TableBody>
-                  {filteredList.map((product, index) => (
-                      <ProductRow product={product} key={index}/>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Scrollbar>
+              <TableBody>
+                {filteredList.map((product, index) => (
+                  <ProductRow product={product} key={index} />
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Scrollbar>
 
-          <Stack alignItems="center" my={4}>
-            <TablePagination
-                onChange={handleChangePage}
-                count={Math.ceil(products.length / rowsPerPage)}
-            />
-          </Stack>
-        </Card>
-      </Box>
+        <Stack alignItems="center" my={4}>
+          <TablePagination
+            onChange={handleChangePage}
+            count={Math.ceil(products.length / rowsPerPage)}
+          />
+        </Stack>
+      </Card>
+    </Box>
   );
 }
 export const getStaticProps = async () => {

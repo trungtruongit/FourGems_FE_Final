@@ -8,7 +8,7 @@ module.exports = {
   images: {
     remotePatterns: [
       {
-        hostname: 'picsum.photo',
+        hostname: "picsum.photo",
       },
     ],
   },

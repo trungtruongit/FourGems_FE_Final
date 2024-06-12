@@ -107,9 +107,12 @@ const NotificationsPopover = () => {
   return (
     <ClickAwayListener onClickAway={handleClose}>
       <Box>
-        <IconButton onClick={handleClick} sx={{
-          bgcolor: "#FFFFFF",
-        }}>
+        <IconButton
+          onClick={handleClick}
+          sx={{
+            bgcolor: "#FFFFFF",
+          }}
+        >
           <Badge color="secondary" variant="dot" badgeContent={1}>
             <Notifications
               sx={{

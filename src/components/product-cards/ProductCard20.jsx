@@ -9,7 +9,7 @@ import { FlexRowCenter } from "components/flex-box";
 import { H4, Paragraph, Small } from "components/Typography";
 import { useAppContext } from "contexts/AppContext";
 import ProductViewDialog from "components/products/ProductViewDialog";
-import {convertBase64ToImage} from "../../utils/convertBase64ToImage";
+import { convertBase64ToImage } from "../../utils/convertBase64ToImage";
 // custom styled components
 const Card = styled(Box)(({ theme }) => ({
   fontFamily: "Ubuntu",
@@ -113,7 +113,10 @@ const ProductCard20 = ({ product }) => {
           title: product.productName,
           price: product.price,
           categoryItem: product.categoryItem,
-          imgGroup: [convertBase64ToImage(product.image), convertBase64ToImage(product.image)],
+          imgGroup: [
+            convertBase64ToImage(product.image),
+            convertBase64ToImage(product.image),
+          ],
           description: product.description,
         }}
       />

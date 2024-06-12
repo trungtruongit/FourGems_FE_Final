@@ -1,5 +1,4 @@
 export const cardList = [
-
   {
     id: 1,
     title: "Order",
@@ -77,4 +76,3 @@ export const stockOutProducts = [
     product: "Jeans Pant",
   },
 ];
-
