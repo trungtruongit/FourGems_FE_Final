@@ -9,7 +9,7 @@ import useMuiTable from "hooks/useMuiTable";
 import Scrollbar from "components/Scrollbar";
 import { ProductRow } from "pages-sections/admin";
 import api from "utils/__api__/dashboard";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -22,7 +22,7 @@ const tableHeading = [
     { id: "ratioPrice", label: "Ratio Price", align: "left" },
     { id: "stonePrice", label: "Stone Price", align: "left" },
     { id: "weight", label: "Weight", align: "left" },
-    { id: "image", label: "Image", align: "left" },
+    // { id: "image", label: "Image", align: "left" },
     { id: "quantity", label: "Quantity", align: "left" },
     { id: "description", label: "Description", align: "left" },
     { id: "isGem", label: "Is Gem", align: "left" },
@@ -40,16 +40,16 @@ export default function ProductList({ initialProducts }) {
     const router = useRouter();
 
     const handleNav = () => {
-        router.push('/admin/products/create');
+        router.push("/admin/products/create");
     };
 
-    let token = '';
-    if (typeof localStorage !== 'undefined') {
-        token = localStorage.getItem('token');
-    } else if (typeof sessionStorage !== 'undefined') {
-        token = sessionStorage.getItem('token');
+    let token = "";
+    if (typeof localStorage !== "undefined") {
+        token = localStorage.getItem("token");
+    } else if (typeof sessionStorage !== "undefined") {
+        token = sessionStorage.getItem("token");
     } else {
-        console.log('Web Storage is not supported in this environment.');
+        console.log("Web Storage is not supported in this environment.");
     }
 
     const {
@@ -69,14 +69,19 @@ export default function ProductList({ initialProducts }) {
             setLoading(true);
             try {
                 if (token) {
-                    const response = await axios.get(`https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=productId&sortType=DESC&categoryName= &searchKeyword= `, {
-                        headers: {
-                            Authorization: `Bearer ` + token
+                    const response = await axios.get(
+                        `https://four-gems-api-c21adc436e90.herokuapp.com/product/show-product?countId=1&pageSize=100&page=0&sortKeyword=productId&sortType=DESC&categoryName= &searchKeyword= `,
+                        {
+                            headers: {
+                                Authorization: `Bearer ` + token,
+                            },
                         }
-                    });
+                    );
                     setProducts(response.data.data);
                 } else {
-                    console.warn("Token is missing. Please ensure it's properly set.");
+                    console.warn(
+                        "Token is missing. Please ensure it's properly set."
+                    );
                 }
             } catch (error) {
                 console.error("Failed to fetch products:", error);
@@ -118,7 +123,10 @@ export default function ProductList({ initialProducts }) {
 
                             <TableBody>
                                 {filteredList.map((product) => (
-                                    <ProductRow product={product} key={product.productId} />
+                                    <ProductRow
+                                        product={product}
+                                        key={product.productId}
+                                    />
                                 ))}
                             </TableBody>
                         </Table>
@@ -152,4 +160,4 @@ export const getStaticProps = async () => {
             },
         };
     }
-}
+};
