@@ -56,23 +56,36 @@ const DataListTable = ({ dataList, tableHeading, type }) => {
           />
           {/* recent purchase table body */}
           {recentPurchase && (
-            <TableBody >
+            <TableBody>
               {filteredList.map((row, index) => {
                 const { id, revenue, fullName, phoneNumber } = row;
                 return (
-                  <StyledTableRow  key={index}>
-                    <StyledTableCell align="left" sx={{
-                      pr: 6,
-                    }}>{id}</StyledTableCell>
-                    <StyledTableCell align="left" sx={{
-                      pl: 1,
-                      pr: 1,
-                    }}>{fullName}</StyledTableCell>
+                  <StyledTableRow key={index}>
+                    <StyledTableCell
+                      align="left"
+                      sx={{
+                        pr: 6,
+                      }}
+                    >
+                      {id}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      align="left"
+                      sx={{
+                        pl: 1,
+                        pr: 1,
+                      }}
+                    >
+                      {fullName}
+                    </StyledTableCell>
 
-                    <StyledTableCell align="center" sx={{
-                      pl: 1,
-                      pr: 6,
-                    }}>
+                    <StyledTableCell
+                      align="center"
+                      sx={{
+                        pl: 1,
+                        pr: 6,
+                      }}
+                    >
                       {phoneNumber}
                     </StyledTableCell>
 
@@ -89,11 +102,13 @@ const DataListTable = ({ dataList, tableHeading, type }) => {
           {type === "STOCK_OUT" && (
             <TableBody>
               {filteredList.map((row, index) => {
-                console.log(filteredList)
+                console.log(filteredList);
                 const { price, quantityInStock, productName } = row;
                 return (
                   <StyledTableRow key={index}>
-                    <StyledTableCell align="left">{productName}</StyledTableCell>
+                    <StyledTableCell align="left">
+                      {productName}
+                    </StyledTableCell>
                     <StyledTableCell
                       align="center"
                       sx={{

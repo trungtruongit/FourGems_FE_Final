@@ -1,14 +1,12 @@
 import categoriesMegaMenu from "./categoriesMegaMenu";
-import {useEffect} from "react"; // MEGAMENU DATA
-
-
+import { useEffect } from "react"; // MEGAMENU DATA
 
 const navbarNavigations = [
   {
     title: "Home",
     megaMenu: false,
     megaMenuWithSub: false,
-    url:"/",
+    url: "/",
     // child: [
     // {
     //   title: "Market 1",
@@ -64,7 +62,7 @@ const navbarNavigations = [
     megaMenu: false,
     megaMenuWithSub: false,
     title: "Barcode",
-    url:"/barcode",
+    url: "/barcode",
     // child: megaMenus,
     // child:[
     //     {
@@ -81,7 +79,7 @@ const navbarNavigations = [
     megaMenu: false,
     megaMenuWithSub: false,
     title: "Buy Back",
-    url: "/buy-back"
+    url: "/buy-back",
     // child: categoriesMegaMenu,
   },
 
@@ -172,48 +170,47 @@ const navbarNavigations = [
   //   title: "Report",
   //   url: "/vendor/dashboard"
   //   // child: [
-    //   {
-    //     title: "Dashboard",
-    //     url: "/vendor/dashboard",
-    //   },
-    //   {
-    //     title: "Products",
-    //     child: [
-    //       {
-    //         title: "All products",
-    //         url: "/admin/products",
-    //       },
-    //       {
-    //         title: "Add/Edit product",
-    //         url: "/admin/products/248104",
-    //       },
-    //     ],
-    //   },
-    //   {
-    //     title: "Orders",
-    //     child: [
-    //       {
-    //         title: "All orders",
-    //         url: "/admin/orders",
-    //       },
-    //       {
-    //         title: "Order details",
-    //         url: "/admin/orders/248104",
-    //       },
-    //     ],
-    //   },
-    //   {
-    //     title: "Profile",
-    //     url: "/vendor/account-setting",
-    //   },
-    // ],
+  //   {
+  //     title: "Dashboard",
+  //     url: "/vendor/dashboard",
+  //   },
+  //   {
+  //     title: "Products",
+  //     child: [
+  //       {
+  //         title: "All products",
+  //         url: "/admin/products",
+  //       },
+  //       {
+  //         title: "Add/Edit product",
+  //         url: "/admin/products/248104",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     title: "Orders",
+  //     child: [
+  //       {
+  //         title: "All orders",
+  //         url: "/admin/orders",
+  //       },
+  //       {
+  //         title: "Order details",
+  //         url: "/admin/orders/248104",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     title: "Profile",
+  //     url: "/vendor/account-setting",
+  //   },
+  // ],
   // },
   {
-
     megaMenu: false,
     megaMenuWithSub: false,
     title: "Logout",
-    url: "/login"
+    url: "/login",
   },
 ];
 export default navbarNavigations;

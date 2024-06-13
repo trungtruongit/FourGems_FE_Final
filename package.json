@@ -10,7 +10,8 @@
     "start": "next start",
     "size": "node --max_old_space_size=4096",
     "fix:prettier": "prettier --write . '!.next' '!.node_modules'",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\""
   },
   "lint-staged": {
     "*.+(js|jsx)": [
@@ -74,7 +75,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.10",
-    "prettier": "^2.7.1",
+    "prettier": "^2.8.8",
     "typescript": "^4.8.4"
   }
 }

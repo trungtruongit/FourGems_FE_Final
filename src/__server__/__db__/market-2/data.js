@@ -125,7 +125,7 @@ export const products = [
         email: "Clementina_Raynor@yahoo.com",
         phone: "821.333.9362 x9878",
         avatar:
-            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1006.jpg",
+          "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1006.jpg",
         password: "673_HVvWUdYguFe",
         dateOfBirth: "2003-06-14T15:18:27.382Z",
         verified: true,
@@ -155,7 +155,7 @@ export const products = [
     colors: [],
     discount: 0,
     thumbnail:
-        "/assets/images/products/Fashion/Clothes/1.SilverHighNeckSweater.png",
+      "/assets/images/products/Fashion/Clothes/1.SilverHighNeckSweater.png",
     images: [
       "/assets/images/products/Fashion/Clothes/1.SilverHighNeckSweater.png",
       "/assets/images/products/Fashion/Clothes/1.SilverHighNeckSweater.png",
@@ -179,7 +179,7 @@ export const products = [
         email: "Clementina_Raynor@yahoo.com",
         phone: "821.333.9362 x9878",
         avatar:
-            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1006.jpg",
+          "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1006.jpg",
         password: "673_HVvWUdYguFe",
         dateOfBirth: "2003-06-14T15:18:27.382Z",
         verified: true,
@@ -209,7 +209,7 @@ export const products = [
     colors: [],
     discount: 0,
     thumbnail:
-        "/assets/images/products/Fashion/Clothes/21.YellowCasualSweater.png",
+      "/assets/images/products/Fashion/Clothes/21.YellowCasualSweater.png",
     images: [
       "/assets/images/products/Fashion/Clothes/21.YellowCasualSweater.png",
       "/assets/images/products/Fashion/Clothes/21.YellowCasualSweater.png",
@@ -233,7 +233,7 @@ export const products = [
         email: "Clementina_Raynor@yahoo.com",
         phone: "821.333.9362 x9878",
         avatar:
-            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1006.jpg",
+          "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1006.jpg",
         password: "673_HVvWUdYguFe",
         dateOfBirth: "2003-06-14T15:18:27.382Z",
         verified: true,
@@ -286,7 +286,7 @@ export const products = [
         email: "Clementina_Raynor@yahoo.com",
         phone: "821.333.9362 x9878",
         avatar:
-            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1006.jpg",
+          "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1006.jpg",
         password: "673_HVvWUdYguFe",
         dateOfBirth: "2003-06-14T15:18:27.382Z",
         verified: true,
@@ -316,7 +316,7 @@ export const products = [
     colors: [],
     discount: 0,
     thumbnail:
-        "/assets/images/products/Fashion/Clothes/19.BlackWhiteSweater.png",
+      "/assets/images/products/Fashion/Clothes/19.BlackWhiteSweater.png",
     images: [
       "/assets/images/products/Fashion/Clothes/19.BlackWhiteSweater.png",
       "/assets/images/products/Fashion/Clothes/19.BlackWhiteSweater.png",
@@ -340,7 +340,7 @@ export const products = [
         email: "Fausto.Schowalter@gmail.com",
         phone: "859-699-8461 x50403",
         avatar:
-            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1048.jpg",
+          "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1048.jpg",
         password: "1qfhl8ZZ88W6ain",
         dateOfBirth: "1974-02-27T05:00:31.895Z",
         verified: true,
@@ -370,7 +370,7 @@ export const products = [
     colors: [],
     discount: 0,
     thumbnail:
-        "/assets/images/products/Fashion/Clothes/20.GrayOvercoatWomen.png",
+      "/assets/images/products/Fashion/Clothes/20.GrayOvercoatWomen.png",
     images: [
       "/assets/images/products/Fashion/Clothes/20.GrayOvercoatWomen.png",
       "/assets/images/products/Fashion/Clothes/20.GrayOvercoatWomen.png",
@@ -394,7 +394,7 @@ export const products = [
         email: "Marlin63@gmail.com",
         phone: "(700) 338-5159 x24398",
         avatar:
-            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1124.jpg",
+          "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1124.jpg",
         password: "GwaFEehjyCfdvxR",
         dateOfBirth: "1967-07-25T08:37:16.955Z",
         verified: true,
@@ -424,7 +424,7 @@ export const products = [
     colors: [],
     discount: 0,
     thumbnail:
-        "/assets/images/products/Fashion/Clothes/24.OliveCasualSweater.png",
+      "/assets/images/products/Fashion/Clothes/24.OliveCasualSweater.png",
     images: [
       "/assets/images/products/Fashion/Clothes/24.OliveCasualSweater.png",
       "/assets/images/products/Fashion/Clothes/24.OliveCasualSweater.png",
@@ -448,7 +448,7 @@ export const products = [
         email: "Clementina_Raynor@yahoo.com",
         phone: "821.333.9362 x9878",
         avatar:
-            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1006.jpg",
+          "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1006.jpg",
         password: "673_HVvWUdYguFe",
         dateOfBirth: "2003-06-14T15:18:27.382Z",
         verified: true,
@@ -501,7 +501,7 @@ export const products = [
         email: "Junius.Farrell@gmail.com",
         phone: "558.717.4898 x4537",
         avatar:
-            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/520.jpg",
+          "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/520.jpg",
         password: "IszXJOR5PSVUckz",
         dateOfBirth: "1989-09-12T14:49:00.812Z",
         verified: true,
